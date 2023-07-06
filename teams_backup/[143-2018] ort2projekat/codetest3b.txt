@@ -1,3 +1,5 @@
+//optimal kusur return
+
 1000, 00 //trazena vrednost
 1001, 0A
 //niz kovanica
