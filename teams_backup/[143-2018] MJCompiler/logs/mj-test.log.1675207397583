@@ -1,0 +1,75 @@
+INFO  00:22:41,235 - Compiling source file: D:\NiK\Faks2\PP1\pp1lab.templateAST\workspace\MJCompiler\test\program.mj
+INFO  00:22:41,262 - #2 program
+INFO  00:22:41,264 - #42 MJProgram
+INFO  00:22:41,264 - #42 int
+INFO  00:22:41,266 - #42 x
+INFO  00:22:41,267 - #19 ;
+INFO  00:22:41,267 - #42 int
+INFO  00:22:41,268 - #42 y
+INFO  00:22:41,268 - #19 ;
+INFO  00:22:41,268 - #17 {
+INFO  00:22:41,268 - #42 int
+INFO  00:22:41,269 - #42 k
+INFO  00:22:41,269 - #20 (
+INFO  00:22:41,270 - #21 )
+INFO  00:22:41,271 - #42 int
+INFO  00:22:41,272 - #42 c
+INFO  00:22:41,272 - #19 ;
+INFO  00:22:41,272 - #17 {
+INFO  00:22:41,273 - #42 c
+INFO  00:22:41,273 - #38 =
+INFO  00:22:41,274 - #41 1
+INFO  00:22:41,274 - #19 ;
+INFO  00:22:41,275 - #12 return
+INFO  00:22:41,276 - #42 c
+INFO  00:22:41,276 - #24 +
+INFO  00:22:41,276 - #41 2
+INFO  00:22:41,278 - #19 ;
+INFO  00:22:41,278 - #18 }
+INFO  00:22:41,278 - #42 int
+INFO  00:22:41,279 - #42 main
+INFO  00:22:41,279 - #20 (
+INFO  00:22:41,279 - #21 )
+INFO  00:22:41,279 - #42 bool
+INFO  00:22:41,279 - #42 n
+INFO  00:22:41,279 - #37 ,
+INFO  00:22:41,280 - #42 m
+INFO  00:22:41,280 - #37 ,
+INFO  00:22:41,280 - #42 o
+INFO  00:22:41,281 - #19 ;
+INFO  00:22:41,281 - #17 {
+INFO  00:22:41,281 - #42 y
+INFO  00:22:41,282 - #38 =
+INFO  00:22:41,283 - #41 2
+INFO  00:22:41,283 - #19 ;
+INFO  00:22:41,284 - #42 x
+INFO  00:22:41,284 - #38 =
+INFO  00:22:41,284 - #42 y
+INFO  00:22:41,284 - #24 +
+INFO  00:22:41,285 - #41 2
+INFO  00:22:41,285 - #19 ;
+INFO  00:22:41,285 - #42 y
+INFO  00:22:41,286 - #38 =
+INFO  00:22:41,286 - #42 k
+INFO  00:22:41,286 - #20 (
+INFO  00:22:41,286 - #21 )
+INFO  00:22:41,287 - #24 +
+INFO  00:22:41,287 - #41 3
+INFO  00:22:41,287 - #19 ;
+INFO  00:22:41,287 - #10 print
+INFO  00:22:41,287 - #20 (
+INFO  00:22:41,287 - #42 y
+INFO  00:22:41,287 - #21 )
+INFO  00:22:41,287 - #19 ;
+INFO  00:22:41,287 - #12 return
+INFO  00:22:41,287 - #41 0
+INFO  00:22:41,288 - #19 ;
+INFO  00:22:41,288 - #18 }
+INFO  00:22:41,288 - #18 }
+INFO  00:22:41,306 - Deklarisana promenljiva x na liniji 2
+INFO  00:22:41,306 - Deklarisana promenljiva y na liniji 2
+INFO  00:22:41,306 - Deklarisana promenljiva c na liniji 5
+ERROR 00:22:41,306 - Nije pronadjen tip bool u tabeli simbola
+ERROR 00:22:41,306 - Greska: tip deklarisane promenljive ne postoji
+INFO  00:22:41,307 - Print calls = 0
+ERROR 00:22:41,307 - Parsiranje NIJE uspesno zavrseno!

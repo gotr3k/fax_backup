@@ -1,0 +1,49 @@
+<div class="telo">
+<mat-spinner *ngIf="loading" style="margin:auto; margin-top:15%;"></mat-spinner>
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Studenti</h1>
+        <button mat-button class="btnObrisiSve" (click)="deleteAllStudents()">Obriši sve</button>
+        <button mat-button class="btnDodaj" (click)="addStudent()">Dodaj</button>
+        
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Korisničko ime</th>
+            <td matt-cell *matCellDef="let student" style="padding-left:25px;">{{student.username}}</td>
+        </ng-container>
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Br. Indeksa</th>
+            <td matt-cell *matCellDef="let student">{{student.index}}</td>
+        </ng-container>
+        <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prezime</th>
+            <td matt-cell *matCellDef="let student">{{student.surname}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime</th>
+            <td matt-cell *matCellDef="let student">{{student.name}}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td matt-cell *matCellDef="let student">{{status(student)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tip studija</th>
+            <td matt-cell *matCellDef="let student">{{tipStudija(student)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let student"><button mat-button class="btnUpdate" (click)="updateStudent(student)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let student"><button mat-button class="btnObrisi" (click)="deleteStudent(student.id, student.username)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let students; columns:columns"></tr>
+    </table>
+</div>
+</div>

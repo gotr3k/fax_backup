@@ -1,0 +1,261 @@
+package application;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
+public class Controller {
+	static final double upperBoundRR=15.0;				//upper bound subserver refresh rates
+														//client uses upperBoundRR+0.1 in code below as its upper bound
+	static final double lowerBoundRR=0.5;				//lower bound for subserver refresh rates
+														//client uses lowerBoundRR+0.1 is code below as its lower bound
+	static final int upperBoundSP=65535;				//upper bound for server socket port
+	static final int lowerBoundSP=49512;				//lower bound for server socket port
+	
+	@FXML
+	private TextField ClientRefreshRateTextField;		//number of seconds between 2 consecutive updates for a client (X)
+	private double clientRefreshRate;					//must be bigger than Y
+	
+	@FXML
+	private TextField SubserverRefreshRateTextField;	//number of seconds between 2 consecutive updates for a subserver (Y)
+	private double subserverRefreshRate;				//must be smaller than X
+
+	@FXML
+	private TextField ServerIPAddressTextField;			//IP address of the server
+	private String serverIPA;
+	
+	@FXML
+	private TextField ServerSocketPortTextField;		//server socket to which clients and subservers will connect
+	private int serverSocketPort;						//[49512-65535]
+	
+	@FXML
+	private Button StartServerButton;
+	
+	@FXML
+	private Button StopServerButton;
+	
+	@FXML
+	private TextArea SubserversTextArea;
+	
+	@FXML
+	private TextArea StocksTextArea;
+	
+	@FXML
+	private TextArea ServerLogsTextArea;
+	
+	@FXML
+	private TextArea ClientsTextArea;
+	
+	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
+	private RequestListener reqListener;
+	
+	private void textChecker() {
+		ClientRefreshRateTextField.setText(String.valueOf(this.clientRefreshRate));
+		SubserverRefreshRateTextField.setText(String.valueOf(this.subserverRefreshRate));
+		ServerSocketPortTextField.setText(String.valueOf(this.serverSocketPort));
+		ServerIPAddressTextField.setText(this.serverIPA);
+	}
+	
+	@FXML
+    public void initialize() {							//on form load
+		clientRefreshRate=3.0;
+		ClientRefreshRateTextField.setText(String.valueOf(this.clientRefreshRate));
+		
+		subserverRefreshRate=2.0;
+		SubserverRefreshRateTextField.setText(String.valueOf(this.subserverRefreshRate));
+		
+		serverSocketPort=50000;
+		ServerSocketPortTextField.setText(String.valueOf(this.serverSocketPort));
+		
+		serverIPA="127.0.0.1";
+		ServerIPAddressTextField.setText(this.serverIPA);
+		
+		
+		
+		//set up listeners for all text fields and buttons which will check validity of their peers (useful when user uses mouse or tab to change focus)
+		ClientRefreshRateTextField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();
+			}
+		});
+		
+		SubserverRefreshRateTextField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();				
+			}
+		});
+		
+		ServerIPAddressTextField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();
+			}
+		});
+		
+		ServerSocketPortTextField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();
+			}
+		});
+		
+		StartServerButton.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();
+			}
+		});
+		
+		StopServerButton.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();
+			}
+		});
+		
+		SubserversTextArea.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();
+			}
+		});
+		
+		ClientsTextArea.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();
+			}
+		});
+		
+		ServerLogsTextArea.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();
+			}
+		});
+		
+		StocksTextArea.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if(newVal) {
+				this.textChecker();
+			}
+		});
+    }
+	
+	public void setClientRefreshRate() {
+		try {			
+			double newRefreshRate=Double.parseDouble(ClientRefreshRateTextField.getText());
+			if(newRefreshRate>=lowerBoundRR+0.1 && newRefreshRate<=upperBoundRR+0.1) {
+				this.clientRefreshRate=(double)Math.round(newRefreshRate*10.0)/10.0;	//round to 1 decimal point
+				if(this.clientRefreshRate<=this.subserverRefreshRate) {					//because subserverRR must be lower than clientRR
+					this.subserverRefreshRate=this.clientRefreshRate-0.1;
+					SubserverRefreshRateTextField.setText(String.valueOf(this.subserverRefreshRate));
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Subserver refresh rate must be smaller than client refresh rate\n"
+							+ "Subserver refresh rate set to: "+this.subserverRefreshRate+" s\n");
+				}
+			}
+			else {
+				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Invalid client refresh rate!\n"+""
+						+ "Client refresh rate must be between "+(lowerBoundRR+0.1)+" and "+(upperBoundRR+0.1)+" s\n");
+			}
+		}
+		catch(Exception ex) {
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Invalid client refresh rate!\n"
+					+"Error: "+ex.toString()+"\n");
+		}
+		finally {
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Client refresh rate set to: "+this.clientRefreshRate+" s\n\n");
+			ClientRefreshRateTextField.setText(String.valueOf(this.clientRefreshRate));
+			ClientRefreshRateTextField.positionCaret(ClientRefreshRateTextField.getLength());
+		}
+	}
+	
+	public void setSubserverRefreshRate() {
+		try {
+			double newRefreshRate=Double.parseDouble(SubserverRefreshRateTextField.getText());
+			if(newRefreshRate>=lowerBoundRR && newRefreshRate<=upperBoundRR) {
+				this.subserverRefreshRate=(double)Math.round(newRefreshRate*10.0)/10.0;		//round to 1 decimal point
+				if(this.clientRefreshRate<=this.subserverRefreshRate) {					//because subserverRR must be lower than clientRR
+					this.clientRefreshRate=this.subserverRefreshRate+0.1;
+					ClientRefreshRateTextField.setText(String.valueOf(this.clientRefreshRate));
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Client refresh rate must be larger than subserver refresh rate\n"
+							+ "Client refresh rate set to: "+this.clientRefreshRate+" s\n");
+				}
+			}
+			else {
+				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Invalid subserver refresh rate!\n"+""
+						+ "Subserver refresh rate must be between "+lowerBoundRR+" and "+upperBoundRR+" s\n");
+			}
+		}
+		catch(Exception ex) {
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Invalid subserver refresh rate!\n"
+					+"Error: "+ex.toString()+"\n");
+			
+		}
+		finally {
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Subserver refresh rate set to: "+this.subserverRefreshRate+" s\n\n");
+			SubserverRefreshRateTextField.setText(String.valueOf(this.subserverRefreshRate));
+			SubserverRefreshRateTextField.positionCaret(SubserverRefreshRateTextField.getLength());
+		}
+	}
+	
+	public void setServerSocketPort() {
+		try {
+			int newSocketPort=Integer.parseInt(ServerSocketPortTextField.getText());
+			if(newSocketPort>=lowerBoundSP && newSocketPort<=upperBoundSP)
+				this.serverSocketPort=newSocketPort;
+			else {
+				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Invalid server socket port!\n"+""
+						+ "Server socket port must be between "+lowerBoundSP+" and "+upperBoundSP+"\n");
+			}
+		}
+		catch(Exception ex) {
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Invalid server socket port!\n"
+					+"Error: "+ex.toString()+"\n");
+		}
+		finally {
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Server socket port set to: "+this.serverSocketPort+"\n\n");
+			ServerSocketPortTextField.setText(String.valueOf(this.serverSocketPort));
+			ServerSocketPortTextField.positionCaret(ServerSocketPortTextField.getLength());
+		}
+	}
+	
+	public void setServerIPAddress() {
+		try {
+			String newIPA=ServerIPAddressTextField.getText();
+			String pattern = "^(([0-1]?[0-9]?[0-9]?|2[0-4][0-9]|25[0-5])\\.){3}([0-1]?[0-9]?[0-9]?|2[0-4][0-9]|25[0-5]){1}$";	//regex pattern for checking validity of IP address
+			if(newIPA.matches(pattern))
+				this.serverIPA=newIPA;
+			else {
+				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Invalid server IP address!\n");
+			}
+		}
+		catch(Exception ex) {
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Invalid server IP address!\n"
+					+"Error: "+ex.toString()+"\n");
+		}
+		finally {
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Server IP address set to: "+this.serverIPA+"\n\n");
+			ServerIPAddressTextField.setText(this.serverIPA);
+			ServerIPAddressTextField.positionCaret(ServerIPAddressTextField.getLength());
+		}
+	}
+	
+	public void startServer() {
+		Platform.runLater(()->{			//allows singlethreaded javafx to run without any errors caused by multithreaded classes
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] STARTING SERVER...\n\n");			
+			textChecker();
+			});
+		//RequestHandler.listenToRequests(this.ClientRefreshRateTextField, this.SubserverRefreshRateTextField, this.ServerIPAddressTextField, this.ServerSocketPortTextField, this.SubserversTextArea, this.ClientsTextArea, this.ServerLogsTextArea, this.StartServerButton, this.StopServerButton);	
+		reqListener=new RequestListener(this.serverIPA, this.serverSocketPort, this.ClientRefreshRateTextField, this.SubserverRefreshRateTextField, this.ServerIPAddressTextField, this.ServerSocketPortTextField, this.SubserversTextArea, this.ClientsTextArea, this.ServerLogsTextArea,  this.StocksTextArea, this.StartServerButton, this.StopServerButton);
+		reqListener.listenToRequests();
+	}
+	
+	public void stopServer() {
+		Platform.runLater(()->{			//allows singlethreaded javafx to run without any errors caused by multithreaded classes
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] SHUTTING DOWN SERVER...\n\n");
+			});
+		//RequestHandler.stopListeningToRequests(this.ClientRefreshRateTextField, this.SubserverRefreshRateTextField, this.ServerIPAddressTextField, this.ServerSocketPortTextField, this.SubserversTextArea, this.ClientsTextArea, this.ServerLogsTextArea, this.StartServerButton, this.StopServerButton);		
+		reqListener.stopListeningToRequests();
+	}
+	
+}

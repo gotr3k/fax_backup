@@ -1,0 +1,63 @@
+package application;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
+public class Controller {
+
+	@FXML
+	private TextField MyIPATextField;
+	
+	@FXML
+	private TextField MySPTextField;
+	
+	@FXML
+	private TextField ServerIPATextField;
+	
+	@FXML
+	private TextField ServerSPTextField;
+	
+	@FXML
+	private Button StartSubserverButton;
+	
+	@FXML
+	private Button StopSubserverButton;
+	
+	@FXML
+	private TextArea AwaitingTransactionsTextArea;
+	
+	@FXML
+	private TextArea CompletedTransactionsTextArea;
+	
+	@FXML
+	private TextArea StocksTextArea;
+	
+	@FXML
+	private TextArea LogsTextArea;
+	
+	public void setMyIPA(){
+		
+	}
+	
+	public void setMySP(){
+		
+	}
+	
+	public void setServerIPA(){
+		
+	}
+	
+	public void setServerSP(){
+		
+	}
+	
+	public void startSubserver(){
+		
+	}
+	
+	public void stopSubserver() {
+		
+	}
+}

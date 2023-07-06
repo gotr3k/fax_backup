@@ -1,0 +1,151 @@
+<div class="nav">
+    <mat-sidenav-container>
+    <mat-sidenav mode="side" role="navigation" opened="true" disableClose="true">
+        <button class="btnBack" mat-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+        <ul>     
+            <li><a (click)="goToO()" class="active">O predmetu</a></li>
+            <li><a (click)="goToOb()">Obaveštenja</a></li>
+            <li><a (click)="goToP()">Predavanja</a></li>
+            <li><a (click)="goToV()">Vežbe</a></li>
+            <li><a (click)="goToL()">Laboratorija</a></li>
+            <li><a (click)="goToD()">Projekat</a></li>
+            <li><a (click)="goToI()">Ispitna pitanja</a></li>
+            <li><a (click)="goToS()">Spiskovi</a></li>
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="glavno">
+            <mat-card>
+                <mat-card-title>O Predmetu</mat-card-title>
+                <div class="polja-horiz1">
+                    <mat-form-field appearance="fill" style="margin-right:1%; width:19%;">
+                      <mat-label>Šifra</mat-label>
+                      <input matInput [(ngModel)]='code' autocomplete='off' (keyup)='deleteMessage()' [formControl]="codeControl" required>
+                      <mat-error *ngIf="codeControl.invalid">{{getCodeErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                
+                    <mat-form-field appearance="fill" style="margin-left:1%; width:49%;">
+                        <mat-label>Naziv</mat-label>
+                        <input matInput [(ngModel)]='name' autocomplete='off' (keyup)='deleteMessage()' [formControl]="nameControl" required>
+                        <mat-error *ngIf="nameControl.invalid">{{getNameErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                </div>
+            
+                <div class="polja-horiz1">
+                    <mat-form-field appearance="fill" style="margin-right:1%; width:22%;">
+                        <mat-label>Odsek</mat-label>
+                        <mat-select [(ngModel)]="odsek" name="odsek">
+                          <mat-option *ngFor="let odsek of odseci" [value]="odsek.oznaka">
+                            {{odsek.naziv}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                
+                      <mat-form-field appearance="fill" style="margin-left:1%; margin-right:1%; width:22%;">
+                        <mat-label>Tip</mat-label>
+                        <mat-select [(ngModel)]="tip" name="food">
+                          <mat-option *ngFor="let tip of tipovi" [value]="tip.oznaka">
+                            {{tip.naziv}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+            
+                      <mat-form-field appearance="fill" style="margin-left:1%; width:22%;">
+                        <mat-label>ESPB</mat-label>
+                          <input matInput [(ngModel)]='espb' autocomplete='off' (keyup)='deleteMessage()' [formControl]="espbControl" required>
+                          <mat-error *ngIf="espbControl.invalid">{{getEspbErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                </div>
+                
+                <div class="polja-horiz1">
+                    <mat-form-field appearance="fill" style="margin-right:1%; width:34%;">
+                        <mat-label>Godina</mat-label>
+                        <mat-select [(ngModel)]="godina" name="godina">
+                          <mat-option *ngFor="let godina of godine" [value]="godina.oznaka">
+                            {{godina.naziv}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                
+                      <mat-form-field appearance="fill" style="margin-left:1%; width:34%;">
+                        <mat-label>Semestar</mat-label>
+                        <mat-select [(ngModel)]="semestar" name="semestar">
+                          <mat-option *ngFor="let semestar of semestri" [value]="semestar.oznaka">
+                            {{semestar.naziv}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+            
+                <div class="polja-horiz1">
+                    <mat-form-field appearance="fill" style="margin-right:1%; width:22%;">
+                    <mat-label>Fond predavanja</mat-label>
+                      <input matInput [(ngModel)]='lectures' autocomplete='off' (keyup)='deleteMessage()' [formControl]="lecturesControl" required>
+                      <mat-error *ngIf="lecturesControl.invalid">{{getLecturesErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                
+                      <mat-form-field appearance="fill" style="margin-right:1%; margin-left:1%; width:22%;">
+                        <mat-label>Fond vežbi</mat-label>
+                        <input matInput [(ngModel)]='exc' autocomplete='off' (keyup)='deleteMessage()' [formControl]="excControl" required>
+                        <mat-error *ngIf="excControl.invalid">{{getExcErrorMessage()}}</mat-error>
+                      </mat-form-field>
+            
+                      <mat-form-field appearance="fill" style="margin-left:1%; width:22%;">
+                        <mat-label>Fond lab. vežbi</mat-label>
+                        <input matInput [(ngModel)]='lab' autocomplete='off' (keyup)='deleteMessage()' [formControl]="labControl" required>
+                        <mat-error *ngIf="labControl.invalid">{{getLabErrorMessage()}}</mat-error>
+                      </mat-form-field>
+                </div>
+            
+                <div class="polja-kolona">
+                    <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Ciljevi Predmeta</mat-label>
+                        <textarea matInput [(ngModel)]='goal' autocomplete='off' (keyup)='deleteMessage()'>
+                        </textarea>
+                    </mat-form-field>
+                
+                    <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Ishodi Učenja</mat-label>
+                        <textarea matInput [(ngModel)]='result' autocomplete='off' (keyup)='deleteMessage()'>
+                    </textarea>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Termini Predavanja</mat-label>
+                        <textarea matInput [(ngModel)]='lectureWhen' autocomplete='off' (keyup)='deleteMessage()'>
+                    </textarea>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Termini Vežbi</mat-label>
+                        <textarea matInput [(ngModel)]='excWhen' autocomplete='off' (keyup)='deleteMessage()'>
+                    </textarea>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Dodatne Informacije</mat-label>
+                        <textarea matInput [(ngModel)]='comment' autocomplete='off' (keyup)='deleteMessage()'>
+                    </textarea>
+                    </mat-form-field>
+                </div>
+                <div style="text-align:center; padding-bottom:5px;">Vidljivost stranica:</div>
+                <div class="polja-horiz1">
+                    <mat-checkbox style="margin:auto; width:33%; text-align:center;" [(ngModel)]='examVisible'>Ispitna pitanja</mat-checkbox>
+                    <mat-checkbox style="margin:auto; width:33%; text-align:center;" [(ngModel)]='labVisible'>Laboratorija</mat-checkbox>
+                    <mat-checkbox style="margin:auto; width:33%; text-align:center;" [(ngModel)]='projectVisible'>Projekti</mat-checkbox>
+                </div>
+                  <div class="dugme">
+                    <button class="btnUpdate" mat-button type='submit' (click)='update()'>Sačuvaj</button>
+                  </div>
+                  <div *ngIf="errorMsg!=''" class="poruka err">
+                    {{errorMsg}}
+                  </div>
+                  <div *ngIf="successMsg!=''" class="poruka succ">
+                    {{successMsg}}
+                  </div>
+                </mat-card>
+        </div>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+    </div>
+    

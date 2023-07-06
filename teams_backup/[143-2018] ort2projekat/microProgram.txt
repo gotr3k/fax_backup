@@ -1,0 +1,272 @@
+!Provera starta! 
+l0: br (if !START then l0); 
+!Citanje instrukcije!
+PCout1, MOST1_2, ldMAR, incPC; 
+l2: br (if hack then l2);
+l3: eMAR, rdCPU, br (if !fcCPU then l3);
+MDRout1, ldIR0;
+br (if !gropr then l7);
+stPRCOD, br lA9;
+l7: br (if l1 then l3D);
+PCout1, MOST1_2, ldMAR, incPC;
+l9: br (if hack then l9);
+lA: eMAR, rdCPU, br (if !fcCPU then lA);
+MDRout1, MOST1_3, ldIR1, ldIR2, ldGPRAR;
+br (if !gradr then lE);
+stPRADR, br lA9;
+lE: br (if l2_brnch then l3D);
+PCout1, MOST1_2, ldMAR, incPC;
+l11: br (if hack then l11);
+l12: eMAR, rdCPU, br (if !fcCPU then l12);
+MDRout1, ldIR2, br (if l3_jump then l3D);
+br (if l3_arlog then l19);
+PCout1, MOST1_2, ldMAR, incPC;
+l16: br (if hack then l16);
+l17: eMAR, rdCPU, br (if !fcCPU then l17);
+MDRout1, ldIR3;
+!Adresiranja!
+l19: bradr
+!Memdir!
+IRDAout3, MOST3_2, ldMAR, br madr24;
+!Memind!
+IRDAout3, MOST3_2, ldMAR;
+l23: br (if hack then l23);
+l24: eMAR, rdCPU, br (if !fcCPU then l24);
+MDRout1, ldDWH, incMAR;
+l26: br (if hack then l26);
+l27: eMAR, rdCPU, br (if !fcCPU then l27);
+MDRout1, ldDWL;
+DWout2, ldMAR, br madr24;
+!Pcrel!
+PCout1, IRPOMout3, ADDout2, ldMAR, br madr24;
+!Imm!
+IRDAout3, MOST3_2, MOST2_1, ldBB, br madr2c;
+!Citanje operanda!
+l30: br (if store_jadr then l3D);
+l31: br (if hack then l31);
+l32: eMAR, rdCPU, br (if !fcCPU then l32);
+MDRout1, ldDWH, incMAR;
+l36: br (if hack then l36);
+l37: eMAR, rdCPU, br (if !fcCPU then l37);
+MDRout1, ldDWL;
+DWout2, MOST2_1, ldBB;
+!Izvrsavanje instrukcije!
+l3D: bropr;
+!HALT!
+clSTART, br l0;
+!LD!
+BBout2, MOST2_1, ldAB;
+ldN, ldZ, ldC, ldV, br madrAC;
+!ST!
+ABout3, MOST3_2, ldAW;
+AWHout3, mxMDR, ldMDR;
+l40: br (if hack then l40);
+l41: eMAR, eMDR, wrCPU, br (if !fcCPU then l41);
+AWout3, mxMDR, ldMDR, incMAR;
+l42: br (if hack then l42);
+l43: eMAR, eMDR, wrCPU, br (if !fcCPU then l43);
+br madrAC;
+!STOREL!
+mxMDR, ldMDR, ABout3;
+l44: br (if hack then l44);
+l45: eMAR, eMDR, wrCPU, br (if !fcCPU then l45);
+br madrAC;
+!JADR!
+ldPC, br madrAC;
+!ADD! 
+BBout2, ABout3, add, ALUout1, ldAB;
+ldN, ldZ, ldC, ldV, br madrAC;
+!SUB! 
+BBout2, ABout3, sub, ALUout1, ldAB;
+ldN, ldZ, ldC, ldV, br madrAC;
+!AND! 
+BBout2, ABout3, and, ALUout1, ldAB;
+ldN, ldZ, ldC, ldV, br madrAC;
+!OR! 
+BBout2, ABout3, or, ALUout1, ldAB;
+ldN, ldZ, ldC, ldV, br madrAC;
+!XOR! 
+BBout2, ABout3, xor, ALUout1, ldAB;
+ldN, ldZ, ldC, ldV, br madrAC;
+!NOT! 
+BBout2, MOST2_1, ldAB;
+ABout3, not, ALUout1, ldAB;
+ldN, ldZ, ldC, ldV, br madrAC;
+!BEQL,..., BLEQU!
+IRBRout3, br (if !brpom then madrAC);
+PCout1, IRPOMout3, ADDout2, ldPC, br madrAC;
+!JMP!
+IRJAout2, ldPC, br madrAC;
+!JSR!
+SPout2, ldMAR, PCLout3, mxMDR, ldMDR, decSP;
+l46: br(if hack then l46);
+l47: eMAR, eMDR, wrCPU, br(if !fcCPU then l47);
+SPout2, ldMAR, PCHout3, mxMDR, ldMDR, decSP;
+l48: br(if hack then l48);
+l49: eMAR, eMDR, wrCPU, br(if !fcCPU then l49);
+IRJAout2, ldPC, br madrAC;
+!RTS!
+incSP;
+SPout2, ldMAR, incSP;
+l4A: br(if hack then l4A);
+l4B: eMAR, rdCPU, br(if !fcCPU then l4B);
+MDRout1, ldDWH, SPout2, ldMAR;
+l4C: br(if hack then l4C);
+l4D: eMAR, rdCPU, br(if !fcCPU then l4D);
+MDRout1, ldDWL;
+DWout2, ldPC, br madrAC;
+!RTI!
+incSP;
+SPout2, ldMAR, incSP;
+l4E: br (if hack then l4E);
+l4F: eMAR, rdCPU, br (if !fcCPU then l4F);
+MDRout1, ldPSWH, SPout2, ldMAR, incSP; 
+l50: br (if hack then l50);
+l51: eMAR, rdCPU, br (if !fcCPU then l51);
+MDRout1, ldPSWL, SPout2, ldMAR, incSP;
+l52: br (if hack then l52);
+l53: eMAR, rdCPU, br (if !fcCPU then l53);
+MDRout1, ldDWH, SPout2, ldMAR, incSP;
+l54: br (if hack then l54);
+l55: eMAR, rdCPU, br (if !fcCPU then l55);
+MDRout1, ldDWL;
+DWout2, ldPC, br madrAC;
+!ASR, LSR, ROR i RORC!
+shr, ldC;
+ldN, ldZ, ldV, br madrAC;
+!ASL, LSL, ROL i ROLC!
+shl, ldC;
+ldN, ldZ, ldV, br madrAC;
+!INTE!
+stPSWI, br madrAC;
+!INTD!
+clPSWI, br madrAC;
+!STIVTP!
+ABout3, ldIVTP, br madrAC;
+!STSP!
+ABout3, ldSP, br madrAC;
+!PUSHALL!
+ABout3, MOST3_2, ldBW, MOST2_1, ldBB;
+ABout3, inc, ALUout1, ldAB;
+ABout3, BBout2, sub, ldAB, ALUout1;
+shl;
+shl;
+shl;
+shl;
+l56: ABout3, dec, ALUout1, ldAB, ldGPRAR;
+GPRout1, MOST1_2, ldAW;
+SPout2, ldMAR, AWout3, mxMDR, ldMDR, decSP;
+l57: br(if hack then l57);
+l58: eMAR, eMDR, wrCPU, br(if !fcCPU then l58);
+SPout2, ldMAR, AWHout3, mxMDR, ldMDR, decSP;
+l59: br(if hack then l59);
+l5A: eMAR, eMDR, wrCPU, br(if !fcCPU then l5A);
+br(if !Z then l56);
+BWout2, MOST2_1, MOST1_3, ldAB;
+SPout2, ldMAR, PSWLout3, mxMDR, ldMDR, decSP;
+l60: br(if hack then l60);
+l61: eMAR, eMDR, wrCPU, br(if !fcCPU then l61);
+SPout2, ldMAR, PSWHout3, mxMDR, ldMDR, decSP;
+l62: br(if hack then l62);
+l63: eMAR, eMDR, wrCPU, br(if !fcCPU then l63);
+br madrAC;
+!POPALL!
+incSP, ABout3, MOST3_2, ldAW;
+SPout2, ldMAR, incSP;
+l70: br (if hack then l70);
+l71: eMAR, rdCPU, br (if !fcCPU then l71);
+MDRout1, ldPSWH, SPout2, ldMAR; 
+l72: br (if hack then l72);
+l73: eMAR, rdCPU, br (if !fcCPU then l73);
+MDRout1, ldPSWL;
+ABout3, MOST3_2, ldBW, MOST2_1, ldBB;
+ABout3, inc, ALUout1, ldAB;
+ABout3, BBout2, sub, ldAB, ALUout1;
+shl;
+shl;
+shl;
+shl;
+ABout3, MOST3_2, MOST2_1, ldBB;
+ABout3, BBout2, sub, ALUout1, ldAB;
+ABout3, MOST3_2, ldBW;
+l64: BWout2, MOST2_1, ldGPRAR, incSP;
+SPout2, ldMAR, incSP;
+l65: br (if hack then l65);
+l66: eMAR, rdCPU, br (if !fcCPU then l66);
+MDRout1, ldDWH, SPout2, ldMAR;
+l67: br (if hack then l67);
+l68: eMAR, rdCPU, br (if !fcCPU then l68);
+MDRout1, ldDWL;
+DWout2, MOST2_1, MOST1_3, wrGPR;
+BWout2, MOST2_1, ldAB;
+ABout3, inc, ALUout1, ldAB, MOST1_2, ldBW;
+ABout3, BBout2, xor, ALUout1, ldAB;
+br (if !Z then l64);
+AWout3, MOST3_2, MOST2_1, ldAB, br madrAC;
+!Opsluzivanje prekida!
+lA9: br (if !prekid then l0);
+!Cuvanje konteksta procesora!
+SPout2, ldMAR, PCLout3, mxMDR, ldMDR, decSP;
+l80: br(if hack then l80);
+l81: eMAR, eMDR, wrCPU, br(if !fcCPU then l81);
+SPout2, ldMAR, PCHout3, mxMDR, ldMDR, decSP;
+l82: br(if hack then l82);
+l83: eMAR, eMDR, wrCPU, br(if !fcCPU then l83);
+SPout2, ldMAR, PSWLout3, mxMDR, ldMDR, decSP;
+l84: br(if hack then l84);
+l85: eMAR, eMDR, wrCPU, br(if !fcCPU then l85);
+SPout2, ldMAR, PSWHout3, mxMDR, ldMDR, decSP;
+l86: br(if hack then l86);
+l87: eMAR, eMDR, wrCPU, br(if !fcCPU then l87);
+!Utvrdivanje broja ulaza!
+br (if !PRINS then lBC);
+IRPOMout3, ldBR, clPRINS, br lC5;
+lBC: br (if !PRCOD then lBE);
+UINTout3, ldBR, clPRCOD, br lC5;
+lBE: br (if !PRADR then lC0);
+UINTout3, ldBR, clPRADR, br lC5;
+lC0: br (if !PRINM then lC2);
+UINTout3, ldBR, clPRINM, br lC5;
+lC2: br (if !printr then lC4);
+UEXTout3, ldBR, clINTR, ldL, br lC5;
+lC4: UINTout3, ldBR;
+!Utvrdivanje adrese prekidne rutine!
+lC5: IVTPout1, IVTDSPout3, ADDout2, ldMAR;
+lC6: br (if hack then lC6);
+lC7: eMAR, rdCPU, br (if !fcCPU then lC7);
+MDRout1, ldDWH, incMAR;
+lC9: br (if hack then lC9);
+lCA: eMAR, rdCPU, br (if !fcCPU then lCA);
+MDRout1, ldDWL;
+DWout2,ldPC,clPSWI,clPSWT, br l0;
+!(Instrukcije ubacene naknadno zbog zadatka)!
+!Push!
+ABout3, ldAW, MOST3_2;
+SPout2, ldMAR, AWout3, mxMDR, ldMDR, decSP;
+lD0: br(if hack then lD0);
+lD1: eMAR, eMDR, wrCPU, br(if !fcCPU then lD1);
+SPout2, ldMAR, AWHout3, mxMDR, ldMDR, decSP;
+lD2: br(if hack then lD2);
+lD3: eMAR, eMDR, wrCPU, br(if !fcCPU then lD3);
+br madrAC;
+!Pop!
+incSP;
+SPout2, ldMAR, incSP;
+lD4: br (if hack then lD4);
+lD5: eMAR, rdCPU, br (if !fcCPU then lD5);
+MDRout1, ldDWH, SPout2, ldMAR;
+lD6: br (if hack then lD6);
+lD7: eMAR, rdCPU, br (if !fcCPU then lD7);
+MDRout1, ldDWL;
+DWout2, MOST2_1, ldAB, br madrAC;
+!LDSP!
+SPout2, MOST2_1, ldAB, br madrAC;
+!LDA!
+ABout3, MOST3_2, ldMAR;
+lD8: br (if hack then lD8);
+lD9: eMAR, rdCPU, br (if !fcCPU then lD9);
+MDRout1, ldDWH, incMAR;
+lDA: br (if hack then lDA);
+lDB: eMAR, rdCPU, br (if !fcCPU then lDB);
+MDRout1, ldDWL;
+DWout2, MOST2_1, ldAB, br madrAC;

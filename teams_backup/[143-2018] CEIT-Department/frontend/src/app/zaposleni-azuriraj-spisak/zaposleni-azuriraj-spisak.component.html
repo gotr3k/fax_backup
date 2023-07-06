@@ -1,0 +1,70 @@
+<div class="nav">
+    <mat-sidenav-container>
+    <mat-sidenav mode="side" role="navigation" opened="true" disableClose="true">
+        <button class="btnBack" mat-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+        <ul>     
+            <li><a (click)="goToO()">O predmetu</a></li>
+            <li><a (click)="goToOb()">Obaveštenja</a></li>
+            <li><a (click)="goToP()">Predavanja</a></li>
+            <li><a (click)="goToV()">Vežbe</a></li>
+            <li><a (click)="goToL()">Laboratorija</a></li>
+            <li><a (click)="goToD()">Projekat</a></li>
+            <li><a (click)="goToI()">Ispitna pitanja</a></li>
+            <li><a (click)="goToS()">Spiskovi</a></li>
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="glavno">
+            <mat-card>
+                <mat-card-title>Ažuriranje spiska</mat-card-title>
+
+                <div class="polja-kolona">
+                    <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Naziv</mat-label>
+                        <input matInput [(ngModel)]='name' autocomplete='off' (keyup)='deleteMessage()' [formControl]="nameControl" required>
+                        <mat-error *ngIf="nameControl.invalid">{{getNameErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                
+                    <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Datum</mat-label>
+                        <input matInput [matDatepicker]="picker" [min]="minDate" [(ngModel)]="date" [formControl]="dateControl" required>
+                        <mat-error *ngIf="dateControl.invalid">{{getDateErrorMessage()}}</mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Vreme</mat-label>
+                        <input matInput [(ngModel)]='time' placeholder="HH:MM" autocomplete='off' (keyup)='deleteMessage()' [formControl]="timeControl" required>
+                        <mat-error *ngIf="timeControl.invalid">{{getTimeErrorMessage()}}</mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Mesto</mat-label>
+                        <input matInput [(ngModel)]='place' autocomplete='off' (keyup)='deleteMessage()' [formControl]="placeControl" required>
+                        <mat-error *ngIf="placeControl.invalid">{{getPlaceErrorMessage()}}</mat-error>
+                    </mat-form-field>
+            
+                    <mat-checkbox [(ngModel)]="check" >Ograničen broj mesta</mat-checkbox>
+
+                    <mat-form-field *ngIf="check" appearance="fill" style="margin:auto; width:70%;">
+                        <mat-label>Br. slobodnih mesta</mat-label>
+                        <input matInput [(ngModel)]='slots' autocomplete='off' (keyup)='deleteMessage()' [formControl]="slotsControl">
+                        <mat-error *ngIf="slotsControl.invalid">{{getSlotsErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                </div>
+                  <div class="dugme">
+                    <button class="btnUpdate" mat-button type='submit' (click)='update()'>Sačuvaj</button>
+                  </div>
+                  <div *ngIf="errorMsg!=''" class="poruka err">
+                    {{errorMsg}}
+                  </div>
+                  <div *ngIf="successMsg!=''" class="poruka succ">
+                    {{successMsg}}
+                  </div>
+                </mat-card>
+        </div>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+    </div>
+    

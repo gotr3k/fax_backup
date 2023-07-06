@@ -1,0 +1,102 @@
+<div class="nav">
+    <mat-sidenav-container>
+    <mat-sidenav mode="side" role="navigation" opened="true" disableClose="true">
+        <button class="btnBack" mat-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+        <ul>     
+            <li><a (click)="goToOb()" >Obaveštenja</a></li>
+            <li><a (click)="goToO()" class="active">O predmetu</a></li>        
+            <li><a (click)="goToP()"  >Predavanja</a></li>
+            <li><a (click)="goToV()" >Vežbe</a></li>
+            <li *ngIf="subject.labVisible"><a (click)="goToL()" >Laboratorija</a></li>
+            <li *ngIf="subject.projectVisible"><a (click)="goToD()" >Projekat</a></li>
+            <li *ngIf="subject.examVisible"><a (click)="goToI()">Ispitna pitanja</a></li>  
+            <li><a (click)="goToS()">Spiskovi</a></li>
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <h1>O predmetu {{subject.name}}</h1>
+        <mat-card>
+        <table>
+            <tr>
+                <td class="highlight">Šifra</td>
+                <td>{{subject.code}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Naziv</td>
+                <td>{{subject.name}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Odsek</td>
+                <td>{{odsek(subject)}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Godina</td>
+                <td>{{godina(subject)}}</td>               
+            </tr>
+            <tr>
+                <td class="highlight">Semestar</td>
+                <td>{{semestar(subject)}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Nastavnik (Predavač)</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let prof of profP"><a (click)="goTo(prof)">{{prof.name}} {{prof.surname}}</a></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="highlight">Nastavnik/saradnik (vežbe)</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let prof of profV"><a (click)="goTo(prof)">{{prof.name}} {{prof.surname}}</a></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="highlight">Status</td>
+                <td>{{tip(subject)}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">ESPB</td>
+                <td>{{subject.espb}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Predavanja nedeljno</td>
+                <td>{{subject.lectures}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Vežbi nedeljno</td>
+                <td>{{subject.exc}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Lab. vežbi nedeljno</td>
+                <td>{{subject.lab}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Cilj predmeta</td>
+                <td>{{subject.goal}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Ishodi predmeta</td>
+                <td>{{subject.result}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Termini predavanja</td>
+                <td>{{subject.lectureWhen}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Termini vežbi</td>
+                <td>{{subject.excWhen}}</td>
+            </tr>
+            <tr>
+                <td class="highlight">Nastavni komentar</td>
+                <td>{{subject.comment}}</td>
+            </tr>
+
+        </table>
+    </mat-card>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+    

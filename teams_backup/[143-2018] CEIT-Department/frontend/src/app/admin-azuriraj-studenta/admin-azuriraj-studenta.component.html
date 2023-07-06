@@ -1,0 +1,60 @@
+<div class="telo">
+<mat-card>
+<mat-card-title>Ažuriranje</mat-card-title>
+<div class="polja-horiz1">
+    <mat-form-field appearance="fill" style="margin-right:1%; width:34%;">
+      <mat-label>Korisničko ime</mat-label>
+      <input matInput placeholder="piGGBBBBx" [(ngModel)]='username' autocomplete='off' (keyup)='deleteMessage()' [formControl]="usernameControl" required>
+      <mat-error *ngIf="usernameControl.invalid">{{getUsernameErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="margin-left:1%; width:34%;">
+        <mat-label>Br. Indeksa</mat-label>
+        <input matInput placeholder="GGGG/BBBB" [(ngModel)]='index' autocomplete='off' (keyup)='deleteMessage()' [formControl]="indexControl" required>
+        <mat-error *ngIf="indexControl.invalid">{{getIndexErrorMessage()}}</mat-error>
+    </mat-form-field>
+</div>
+
+  <div class="polja-horiz2">
+    <mat-form-field appearance="fill" style="margin-right:1%; width:34%;">
+        <mat-label>Ime</mat-label>
+        <input matInput [(ngModel)]='ime' autocomplete='off' (keyup)='deleteMessage()' [formControl]="imeControl" required>
+        <mat-error *ngIf="imeControl.invalid">{{getImeErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin-left:1%; width:34%;">
+        <mat-label>Prezime</mat-label>
+        <input matInput [(ngModel)]='prezime' autocomplete='off' (keyup)='deleteMessage()' [formControl]="prezimeControl" required>
+        <mat-error *ngIf="prezimeControl.invalid">{{getPrezimeErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="polja-kolona">
+    <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+        <mat-label>Tip studija</mat-label>
+        <mat-select [(ngModel)]="tipStud" name="studyType">
+          <mat-option *ngFor="let tipStudija of tipoviStudija" [value]="tipStudija.oznaka">
+            {{tipStudija.naziv}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="tipControl.invalid">{{getTipErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="status" name="status">
+          <mat-option *ngFor="let status of statusi" [value]="status.oznaka">
+            {{status.naziv}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+  <div class="dugme">
+    <button class="btnUpdate" mat-button type='submit' (click)='update()'>Sačuvaj</button>
+  </div>
+  <div *ngIf="errorMsg!=''" class="poruka err">
+    {{errorMsg}}
+  </div>
+  <div *ngIf="successMsg!=''" class="poruka succ">
+    {{successMsg}}
+  </div>
+</mat-card>
+</div>

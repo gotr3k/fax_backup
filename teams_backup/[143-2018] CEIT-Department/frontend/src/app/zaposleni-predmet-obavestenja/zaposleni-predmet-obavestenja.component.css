@@ -1,0 +1,165 @@
+.nav{
+    height:100%;
+}
+mat-sidenav-container{
+    height:100%;
+    z-index:0;
+}
+
+mat-sidenav{
+    width:200px;
+}
+
+ul{
+    padding-top:40px;
+    font-size:22px;
+    list-style-type:none;
+    margin-left:0;
+}
+
+li{
+    padding-bottom:30px;
+}
+a{
+    color:rgb(12, 130, 185);
+}
+
+a:hover{
+    color:#283593;
+    cursor: pointer;
+}
+
+.active{
+    text-decoration: underline;
+    color:#212121;
+}
+a:active{
+    text-decoration: underline;
+    color:#212121;
+}
+.btnBack{
+    color:white;
+    background-color:#3f51b5;
+    margin-top:60px;
+    width:70px;
+    margin-left:65px;
+}
+
+.btnBack:hover{
+    background-color:#283593;
+}
+
+.container{
+    width:100%;
+}
+
+
+h1{
+    display:inline-block;
+    padding-left:10%;
+    margin:auto;
+    margin-top:30px;  
+    font-size:30px;
+    color:#283593;
+}
+
+.btnObrisiSve{
+    float:right;
+    margin-top:30px;
+    margin-right:10%;
+    background-color:#f44336;
+    color: #ffffff;
+    width:100px;
+}
+
+.btnDodaj{
+    float:right;
+    margin-top:30px;
+    margin-right:2%;
+    background-color:#4caf50;
+    color: #ffffff;
+    width:100px;
+}
+
+.sredina{
+    margin-top:30px;
+}
+mat-expansion-panel{
+    margin:auto;
+    width:80%;
+}
+
+mat-expansion-panel:hover{
+    background-color: #c5cae9;
+}
+mat-panel-description{
+    padding-top:10px;
+    display:inline-flex;
+}
+
+mat-panel-title{
+    font-size:18px;
+    width:80%;
+    margin-right:10%;
+}
+
+.pom{
+    width:15%;
+    padding-top:10px;
+}
+
+.naslov{
+    padding-top:10px;
+}
+
+mat-icon{
+    font-size:24px;
+    transform: translateX(-8px) translateY(-3px);
+}
+
+.btnBack mat-icon{
+    transform: translateX(0) translateY(0);
+}
+
+.btnObrisi{
+    margin-top:auto;
+    margin-bottom:auto;
+    margin-left:10px;
+    height:24px;
+    width:24px;
+    background-color:transparent;
+    border:none;
+    outline:none;
+    
+}
+
+.btnUpdate{
+    margin-top:auto;
+    margin-bottom:auto;
+
+    height:24px;
+    width:24px;
+    background-color:transparent;
+    border:none;
+    outline:none;
+}
+
+.btnObrisi:hover{
+    color:#f44336;
+    cursor:pointer;
+}
+
+.btnUpdate:hover{
+    color:#283593;
+    cursor:pointer;
+}
+
+.fileList{
+    font-size:16px;
+    margin-left:-40px;
+    margin-top:-30px;
+}
+
+.fileList li{
+    padding-bottom:3px;
+}

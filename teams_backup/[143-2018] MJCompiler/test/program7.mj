@@ -1,0 +1,32 @@
+// Test301
+
+program test301
+	int niz[], niz2[];
+	
+{
+	void main()	
+	{
+		niz = new int[3];
+		niz2 = new int[3];
+		
+		niz[0] = 2;
+		niz[1] = 4;
+		niz[2] = 6;
+		
+		niz2 = niz;
+		
+		niz[0] = 1;
+		niz[1] = 2;
+		niz[2] = 3;
+		
+		print(niz[0]);
+		print(niz[1]);
+		print(niz[2]);
+		
+		print('|');
+		
+		print(niz2[0]);
+		print(niz2[1]);
+		print(niz2[2]);
+	}
+}

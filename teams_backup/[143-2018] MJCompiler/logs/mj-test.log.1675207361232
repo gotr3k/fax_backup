@@ -1,0 +1,65 @@
+INFO  00:21:51,437 - Compiling source file: D:\NiK\Faks2\PP1\pp1lab.templateAST\workspace\MJCompiler\test\program.mj
+INFO  00:21:51,774 - #2 program
+INFO  00:21:51,774 - #42 MJProgram
+INFO  00:21:51,774 - #42 int
+INFO  00:21:51,778 - #42 x
+INFO  00:21:51,780 - #19 ;
+INFO  00:21:51,780 - #42 int
+INFO  00:21:51,791 - #42 y
+INFO  00:21:51,791 - #19 ;
+INFO  00:21:51,792 - #17 {
+INFO  00:21:51,792 - #42 int
+INFO  00:21:51,794 - #42 k
+INFO  00:21:51,794 - #20 (
+INFO  00:21:51,800 - #21 )
+INFO  00:21:51,806 - #42 int
+INFO  00:21:51,812 - #42 c
+INFO  00:21:51,812 - #19 ;
+INFO  00:21:51,812 - #17 {
+INFO  00:21:51,812 - #42 c
+INFO  00:21:51,814 - #38 =
+INFO  00:21:51,817 - #41 1
+INFO  00:21:51,817 - #19 ;
+INFO  00:21:51,817 - #12 return
+INFO  00:21:51,818 - #42 c
+INFO  00:21:51,818 - #24 +
+INFO  00:21:51,818 - #41 2
+INFO  00:21:51,833 - #19 ;
+INFO  00:21:51,833 - #18 }
+INFO  00:21:51,833 - #42 int
+INFO  00:21:51,835 - #42 main
+INFO  00:21:51,836 - #20 (
+INFO  00:21:51,836 - #21 )
+INFO  00:21:51,836 - #42 bool
+INFO  00:21:51,836 - #42 n
+INFO  00:21:51,836 - #37 ,
+INFO  00:21:51,836 - #42 m
+INFO  00:21:51,836 - #37 ,
+INFO  00:21:51,836 - #42 o
+INFO  00:21:51,836 - #19 ;
+INFO  00:21:51,836 - #17 {
+INFO  00:21:51,836 - #42 y
+INFO  00:21:51,837 - #38 =
+INFO  00:21:51,837 - #41 2
+INFO  00:21:51,837 - #19 ;
+INFO  00:21:51,837 - #42 x
+INFO  00:21:51,837 - #38 =
+INFO  00:21:51,837 - #42 y
+INFO  00:21:51,837 - #24 +
+INFO  00:21:51,837 - #41 2
+INFO  00:21:51,837 - #19 ;
+INFO  00:21:51,837 - #42 y
+INFO  00:21:51,837 - #38 =
+INFO  00:21:51,837 - #42 k
+INFO  00:21:51,837 - #20 (
+INFO  00:21:51,838 - #21 )
+INFO  00:21:51,840 - #24 +
+INFO  00:21:51,840 - #41 3
+INFO  00:21:51,840 - #19 ;
+INFO  00:21:51,840 - #42 int
+INFO  00:21:51,840 - #42 a
+ERROR 00:21:51,840 - 
+Sintaksna greska na liniji 16
+ERROR 00:21:51,840 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 16
+INFO  00:21:51,853 - Print calls = 0
+ERROR 00:21:51,853 - Parsiranje NIJE uspesno zavrseno!

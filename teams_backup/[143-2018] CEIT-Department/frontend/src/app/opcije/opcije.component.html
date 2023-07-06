@@ -1,0 +1,45 @@
+<mat-card *ngIf="type=='student' || type=='employee'">
+    <mat-card-title>
+        Podešavanja
+    </mat-card-title>
+        <div *ngIf="hintMsg!=''" class="poruka hint">
+          {{hintMsg}}
+        </div>
+        <div class="polja-kolona">
+            <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+              <mat-label>Stara lozinka</mat-label>
+              <input matInput [type]="oldhide ? 'password' : 'text'" [formControl]="oldPasswordControl" (keyup)='deleteMessage()' [(ngModel)]='oldPassword' required>
+              <button mat-icon-button matSuffix (click)="oldhide = !oldhide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="oldhide">
+              <mat-icon>{{oldhide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="oldPasswordControl.invalid">{{getOldPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                <mat-label>Nova lozinka</mat-label>
+                <input matInput  [type]="hide ? 'password' : 'text'" [formControl]="passwordControl" (keyup)='deleteMessage()' [(ngModel)]='password' required>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="passwordControl.invalid">{{getPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+                <mat-label>Potvrdite novu lozinku</mat-label>
+                <input matInput  [type]="chide ? 'password' : 'text'" [formControl]="cpasswordControl" (keyup)='deleteMessage()' [(ngModel)]='cpassword' required>
+                <button mat-icon-button matSuffix (click)="chide = !chide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="chide">
+                <mat-icon>{{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="cpasswordControl.invalid">{{getCpasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="dugme">
+            <button class="btnSave" mat-button type='submit' (click)='saveChanges()'>Sačuvaj</button>
+          </div>
+          <div *ngIf="errorMsg!=''" class="poruka err">
+            {{errorMsg}}
+          </div>
+          <div *ngIf="successMsg!=''" class="poruka succ">
+            {{successMsg}}
+          </div>
+</mat-card>

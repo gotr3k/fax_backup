@@ -1,0 +1,40 @@
+mat-card{
+    width:60%;
+    margin:auto;
+    margin-top:50px;
+    
+}
+.secondaryTile{
+    border:1px solid #c5cae9;
+}
+
+.mainTile{
+    border:2px solid #9fa8da;
+}
+mat-card{
+    font-size:20px;
+}
+
+mat-icon{
+    font-size:24px;
+}
+mat-card-title{
+    font-size:30px;
+    color:#283593;
+    font-weight:400;
+    margin-bottom:30px;
+    padding-top:10px;
+}
+
+.title{
+    font-size:26px;
+    color:#283593;
+}
+
+a{
+    color:rgb(12, 130, 185);
+}
+
+a:hover{
+    cursor: pointer;
+}

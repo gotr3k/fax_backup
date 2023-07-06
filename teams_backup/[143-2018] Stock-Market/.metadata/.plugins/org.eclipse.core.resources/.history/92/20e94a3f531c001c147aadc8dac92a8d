@@ -1,0 +1,63 @@
+package application;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
+public class RequestListener {
+	private static ServerSocket serverSocket;
+	private static Socket socket;
+	private static AtomicBoolean subserverIsRunning=new AtomicBoolean(false);
+	private static ObjectOutputStream oos;
+	private static ObjectInputStream ois;
+	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
+	private static String myIPA;
+	private static InetAddress myInetAddress;
+	private static int mySP;
+	
+	@FXML
+	private static TextArea AwaitingTransactionsTextArea;
+	
+	@FXML
+	private static TextArea CompletedTransactionsTextArea;
+	
+	@FXML
+	private static TextArea StocksTextArea;
+	
+	@FXML
+	private static TextArea LogsTextArea;
+	
+	public static LinkedBlockingQueue<Vector<String>> requestQueue = new LinkedBlockingQueue<Vector<String>>();	//blocking queue for connection requests that come from clients and subservers (ipa, port, type, operation, username/stockname, password/amount)	
+	public static LinkedBlockingQueue<Vector<String>> stocksQueue=new LinkedBlockingQueue<Vector<String>>();		//queue in which stocks are stored (name, price, subserver ipa, subserver port)
+
+	RequestListener(String ipa, int sp, TextArea Logs, TextArea Stocks, TextArea Awaiting, TextArea Compl){
+		myIPA=ipa;
+		try {
+			myInetAddress=InetAddress.getByName(ipa);
+		} catch (UnknownHostException e) {
+			LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot convert IP address to InetAddress Object!\n"
+					+"Error: "+e.toString()+"\n\n");
+		}
+		mySP=sp;
+		LogsTextArea=Logs;
+		StocksTextArea=Stocks;
+		AwaitingTransactionsTextArea=Awaiting;
+		CompletedTransactionsTextArea=Compl;
+		
+	}
+}

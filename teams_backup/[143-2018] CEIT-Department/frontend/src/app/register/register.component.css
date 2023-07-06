@@ -1,0 +1,52 @@
+.polja-kolona{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.polja-horiz1{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:row;
+}
+
+.polja-horiz2{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:row;
+}
+
+
+
+mat-icon-button{
+    border:none!important;
+}
+
+.dugme{
+    margin-top:10px;
+    margin-bottom:20px;
+    text-align:center;
+}
+.btn-reg{
+    background-color: #e91e63;
+    color: #ffffff;
+}
+
+.poruka{
+    text-align:center;
+    font-size:16px;
+    font-weight:500;
+    margin-bottom:10px;
+}
+
+.err{
+    color: #f44336;
+}
+
+.succ{
+    color:#4caf50;
+}

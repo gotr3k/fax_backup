@@ -1,0 +1,162 @@
+package application;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.Semaphore;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
+public class RequestServant extends Thread{
+	private Socket socket;
+	private static LinkedBlockingQueue<Vector<String>> requests;
+	private static LinkedBlockingQueue<Vector<String>> clients;
+	private static LinkedBlockingQueue<Vector<String>> subservers;
+	private static LinkedBlockingQueue<Vector<String>> stocks;
+	private static double clientRR;
+	private static double subserverRR;
+	private ObjectOutputStream oos;
+	private ObjectInputStream ois;
+	static Semaphore semaphoreSSTA=new Semaphore(1);
+	static Semaphore semaphoreSLTA=new Semaphore(1);
+	static Semaphore semaphoreCTA=new Semaphore(1);
+	
+	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		
+	@FXML
+	private static TextArea SubserversTextArea;
+	
+	@FXML
+	private static TextArea ServerLogsTextArea;
+	
+	@FXML
+	private static TextArea ClientsTextArea;
+	
+	public RequestServant(double cRR, double sRR, Socket s, LinkedBlockingQueue<Vector<String>> req, LinkedBlockingQueue<Vector<String>> cli, LinkedBlockingQueue<Vector<String>> sub, LinkedBlockingQueue<Vector<String>> stk, TextArea ssta, TextArea slta, TextArea cta) {
+		clientRR=cRR;
+		subserverRR=sRR;
+		this.socket=s;
+		requests=req; //CHECK
+		clients=cli; //CHECK
+		subservers=sub; //CHECK
+		stocks=stk; //CHECK
+		SubserversTextArea=ssta;
+		ServerLogsTextArea=slta;
+		ClientsTextArea=cta;
+	}
+	
+	@Override
+	public void run() {
+        try {
+        	oos = new ObjectOutputStream(socket.getOutputStream());
+        	ois = new ObjectInputStream(socket.getInputStream());
+        	//semaphoreSLTA.acquireUninterruptibly();
+        	//this.ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Created input and output streams towards "
+    				//+socket.getInetAddress().toString().substring(1, socket.getInetAddress().toString().length())
+    				//+"/"+socket.getPort()+"\n\n");
+        	//semaphoreSLTA.release();
+        	Vector<String> temp = (Vector<String>)ois.readObject();	
+        	String operation=temp.remove(0);				//first string is always name of the operation
+        	
+        	semaphoreSLTA.acquireUninterruptibly();
+    		ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Accepted '"+operation+"' request from "
+    				+socket.getInetAddress().toString().substring(1, socket.getInetAddress().toString().length())
+    				+"/"+socket.getPort()+"\n\n");
+    		semaphoreSLTA.release();
+        	
+        	//semaphoreSLTA.acquireUninterruptibly();
+        	//this.ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] "
+    				//+socket.getInetAddress().toString().substring(1, socket.getInetAddress().toString().length())
+    				//+"/"+socket.getPort()+":"+operation+"\n\n");
+        	//semaphoreSLTA.release();
+    		
+        	switch(operation) {
+        	case "client connect":{
+        			if(RequestServant.clients.offer(temp)) {	//if client[username, password, ???clientServerSocket???] can be added to lbq clients
+        				semaphoreCTA.acquireUninterruptibly();
+        				ClientsTextArea.clear();    				
+        				ClientsTextArea.appendText(clients.toString());
+        				semaphoreCTA.release();
+        				String succ="successful";
+        				oos.writeObject(succ);
+        				oos.flush();
+        				//ois.close();
+        				//oos.close();
+        				//socket.close();
+        				semaphoreSLTA.acquireUninterruptibly();
+        				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Sent 'successful' connect to "
+        						+socket.getInetAddress().toString().substring(1, socket.getInetAddress().toString().length())
+        						+"/"+socket.getPort()+"\n\n");
+        				semaphoreSLTA.release();
+        				
+        				int cnt=1;
+        				while(RequestServant.clients.contains(temp)) {
+        					sleep((int)clientRR*1000);
+        					oos.writeObject("update "+cnt);
+        					oos.flush();       					
+        					semaphoreSLTA.acquireUninterruptibly();
+            				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Sent 'update "+cnt+"' to "
+            						+socket.getInetAddress().toString().substring(1, socket.getInetAddress().toString().length())
+            						+"/"+socket.getPort()+"\n\n");
+            				semaphoreSLTA.release();
+            				cnt++;
+        				}
+        				
+        			}
+        			else {
+        				oos.writeObject("not successful");
+        				oos.flush();
+    				}
+        			oos.close();
+    				ois.close();
+    				socket.close();
+        			break;
+        		}
+        	case "client disconnect":{
+        		semaphoreSLTA.acquireUninterruptibly();
+				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] User "+temp.get(0)+" wants to disconnect\n\n");
+				semaphoreSLTA.release();
+    			if(RequestServant.clients.remove(temp)) {
+    				semaphoreCTA.acquireUninterruptibly();
+    				ClientsTextArea.clear();    				
+    				ClientsTextArea.appendText(clients.toString());
+    				semaphoreCTA.release();
+
+    				oos.writeObject("successful");
+    				oos.flush();
+    				oos.close();
+    				ois.close();
+    				
+    				semaphoreSLTA.acquireUninterruptibly();
+    				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Sent 'successful disconnect' to "
+    						+socket.getInetAddress().toString().substring(1, socket.getInetAddress().toString().length())
+    						+"/"+socket.getPort()+"\n\n");
+    				semaphoreSLTA.release();
+    				
+    				socket.close();
+    			}
+    			break;
+        		
+        	}
+        		case "subserver connect":{
+        			break;
+        		}
+        	}
+        	
+		} catch (Exception ex) {
+			semaphoreSLTA.acquireUninterruptibly();
+			ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Error! Can't establish communication with "
+					+socket.getInetAddress().toString().substring(1, socket.getInetAddress().toString().length())
+					+"/"+socket.getPort()+"\nError: "+ex.toString()+"\n\n");
+			semaphoreSLTA.release();
+		}
+	}
+}

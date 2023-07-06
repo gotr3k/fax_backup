@@ -1,0 +1,159 @@
+.nav{
+    height:100%;
+}
+mat-sidenav-container{
+    height:100%;
+    z-index:0;
+}
+
+mat-sidenav{
+    width:200px;
+}
+
+ul{
+    padding-top:40px;
+    font-size:22px;
+    list-style-type:none;
+    margin-left:0;
+}
+
+li{
+    padding-bottom:30px;
+}
+a{
+    color:rgb(12, 130, 185);
+}
+
+a:hover{
+    color:#283593;
+    cursor: pointer;
+}
+
+.active{
+    text-decoration: underline;
+    color:#212121;
+}
+a:active{
+    text-decoration: underline;
+    color:#212121;
+}
+.btnBack{
+    color:white;
+    background-color:#3f51b5;
+    margin-top:60px;
+    width:70px;
+    margin-left:65px;
+}
+
+.btnBack:hover{
+    background-color:#283593;
+}
+
+table{
+    margin:auto;
+    margin-top:1%;
+    width:80%;
+}
+
+.poslednja{
+    padding-bottom:45px;
+}
+
+h1{
+    display:inline-block;
+    padding-left:10%;
+    margin:auto;
+    padding-top:30px;
+    font-size:30px;
+    color:#283593;
+}
+
+
+.sredina{
+    margin-top:30px;
+}
+mat-expansion-panel{
+    margin:auto;
+    width:80%;
+}
+
+mat-expansion-panel:hover{
+    background-color: #c5cae9;
+}
+mat-panel-description{
+    padding-top:10px;
+    display:inline-flex;
+}
+
+mat-panel-title{
+    font-size:18px;
+    width:80%;
+    margin-right:10%;
+}
+
+.pom{
+    width:15%;
+    padding-top:5px;
+}
+
+.naslov{
+    padding-top:10px;
+    margin-top:2px;
+}
+
+mat-icon{
+    font-size:24px;
+    transform: translateX(-8px) translateY(-3px);
+}
+
+.btnBack mat-icon{
+    transform: translateX(0) translateY(0);
+}
+
+
+.mesto{
+    font-size:14px;
+    color:#9e9e9e;
+}
+
+.btnEnroll{
+    margin-top:auto;
+    margin-bottom:auto;
+    height:24px;
+    width:24px;
+    background-color:transparent;
+    border:none;
+    outline:none;
+    transform: translateY(5px);
+}
+
+.btnEnroll:hover{
+    color:#4caf50;
+    cursor:pointer;
+}
+
+.btnDropOut{
+    margin-top:auto;
+    margin-bottom:auto;
+    height:24px;
+    width:24px;
+    background-color:transparent;
+    border:none;
+    outline:none;
+    transform: translateY(5px);
+}
+
+.btnDropOut:hover{
+    color:#f44336;
+    cursor:pointer;
+}
+
+mat-expansion-panel ul{
+    margin:0;
+    padding:0;
+    font-size:16px;
+}
+
+mat-expansion-panel li{
+    padding-bottom:3px;
+}

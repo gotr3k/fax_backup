@@ -1,0 +1,58 @@
+program MJProgram
+	int x; int y; bool x;
+	const int c1 = 10;
+	const bool c2 = true;
+	const char c3 = 3;
+{
+	int dummyMethod(int a)
+	int b;
+	{
+		return 45;
+	}
+	
+	int k () int c; {
+		c = 1;
+		return 2;
+	}
+	
+	int r(bool p)
+	{
+		
+	}
+	void awooga(int q, bool w)
+	{
+
+	}
+	void main5()
+	char n, m, o;
+	int arr1[];
+	char arr2[];
+	bool arr3[];
+	bool x;
+	{
+		y = 2;
+		x = y + 2;
+		y = k() + 3;
+		print(y);
+		y = 4;
+		r(true);
+		y = 5;
+		chr(123);
+		r('s');
+		chr(false);
+		y = 5;
+		awooga(false, 's');
+		ord(12);
+		ord('f');
+		len(arr1);
+		len(arr2);
+		len(arr3);
+		len(198);
+		x = p + o;
+		x = true;
+		k = 47;
+		k++;
+		arr1++;
+		arr1[5]++;
+	}
+}

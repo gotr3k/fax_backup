@@ -1,0 +1,62 @@
+.container{
+    margin:auto;
+    width:100%;
+    background-color:#e8eaf6;
+}
+.telo{
+    background-color:#e8eaf6;
+    width:100%;
+    margin:auto;
+    position:absolute;
+    bottom:4%;
+    top:17.6%;
+}
+table{
+    margin:auto;
+    margin-top:1%;
+    width:80%;
+    padding-bottom:45px;
+}
+
+h1{
+    display:inline-block;
+    padding-left:10%;
+    margin:auto;
+    padding-top:1%;
+    font-size:30px;
+    color:#283593;
+}
+
+.mat-row:hover{
+    background-color:#c5cae9;
+}
+
+
+.btnObrisiSve{
+    float:right;
+    margin-top:1%;
+    margin-right:10%;
+    background-color:#f44336;
+    color: #ffffff;
+    width:100px;
+}
+
+.btnDodaj:hover{
+    color: #4caf50;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+.btnIzbaci:hover{
+    color: #f44336;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}

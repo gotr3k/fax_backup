@@ -1,0 +1,39 @@
+program MJProgram
+int niz1[];
+{
+	void main()
+	int a[];
+	int b, c, d;
+	int niz2[];
+	{
+		a = new int[3];
+		a[0] = 10;
+		a[1] = 20;
+		a[2] = 30;
+		
+		niz1 = new int[2];
+		niz1[0] = 11;
+		niz1[1] = 22;
+		
+		niz2 = new int[2];
+		niz2[0] = 111;
+		niz2[1] = 222;
+		
+		b = 5;
+		
+		print(b); //5
+		print(niz1[1]); //22
+		print(niz2[0]); //111
+		print(a[2]*2); //60
+		
+		b++;
+		print(b); //6
+		b = a[1];
+		print(b); //20
+		
+		//multi assign
+		[c, , d] = a;
+		print(c); //10
+		print(d); //30
+	}
+}

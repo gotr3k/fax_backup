@@ -1,0 +1,77 @@
+INFO  01:05:40,600 - Compiling source file: D:\NiK\Faks2\PP1\pp1lab.templateAST\workspace\MJCompiler\test\program.mj
+INFO  01:05:40,625 - #2 program
+INFO  01:05:40,625 - #42 MJProgram
+INFO  01:05:40,626 - #42 int
+INFO  01:05:40,627 - #42 x
+INFO  01:05:40,627 - #19 ;
+INFO  01:05:40,628 - #42 int
+INFO  01:05:40,628 - #42 y
+INFO  01:05:40,628 - #19 ;
+INFO  01:05:40,629 - #17 {
+INFO  01:05:40,629 - #42 int
+INFO  01:05:40,629 - #42 k
+INFO  01:05:40,629 - #20 (
+INFO  01:05:40,630 - #21 )
+INFO  01:05:40,631 - #42 int
+INFO  01:05:40,631 - #42 c
+INFO  01:05:40,631 - #19 ;
+INFO  01:05:40,631 - #17 {
+INFO  01:05:40,632 - #42 c
+INFO  01:05:40,632 - #38 =
+INFO  01:05:40,633 - #41 1
+INFO  01:05:40,633 - #19 ;
+INFO  01:05:40,634 - #12 return
+INFO  01:05:40,634 - #42 c
+INFO  01:05:40,634 - #24 +
+INFO  01:05:40,635 - #41 2
+INFO  01:05:40,635 - #19 ;
+INFO  01:05:40,635 - #18 }
+INFO  01:05:40,636 - #42 int
+INFO  01:05:40,636 - #42 main
+INFO  01:05:40,637 - #20 (
+INFO  01:05:40,637 - #21 )
+INFO  01:05:40,637 - #42 char
+INFO  01:05:40,637 - #42 n
+INFO  01:05:40,637 - #37 ,
+INFO  01:05:40,637 - #42 m
+INFO  01:05:40,637 - #37 ,
+INFO  01:05:40,637 - #42 o
+INFO  01:05:40,637 - #19 ;
+INFO  01:05:40,637 - #17 {
+INFO  01:05:40,637 - #42 y
+INFO  01:05:40,638 - #38 =
+INFO  01:05:40,638 - #41 2
+INFO  01:05:40,638 - #19 ;
+INFO  01:05:40,638 - #42 x
+INFO  01:05:40,638 - #38 =
+INFO  01:05:40,638 - #42 y
+INFO  01:05:40,638 - #24 +
+INFO  01:05:40,638 - #41 2
+INFO  01:05:40,638 - #19 ;
+INFO  01:05:40,638 - #42 y
+INFO  01:05:40,638 - #38 =
+INFO  01:05:40,638 - #42 k
+INFO  01:05:40,639 - #20 (
+INFO  01:05:40,639 - #21 )
+INFO  01:05:40,640 - #24 +
+INFO  01:05:40,640 - #41 3
+INFO  01:05:40,640 - #19 ;
+INFO  01:05:40,640 - #10 print
+INFO  01:05:40,640 - #20 (
+INFO  01:05:40,640 - #42 y
+INFO  01:05:40,640 - #21 )
+INFO  01:05:40,640 - #19 ;
+INFO  01:05:40,640 - #12 return
+INFO  01:05:40,641 - #41 0
+INFO  01:05:40,641 - #19 ;
+INFO  01:05:40,641 - #18 }
+INFO  01:05:40,641 - #18 }
+INFO  01:05:40,648 - Deklarisana promenljiva x na liniji 2
+INFO  01:05:40,648 - Deklarisana promenljiva y na liniji 2
+INFO  01:05:40,648 - Obradjuje se funkcija k na liniji 5
+INFO  01:05:40,648 - Deklarisana promenljiva c na liniji 5
+INFO  01:05:40,648 - Obradjuje se funkcija main na liniji 10
+INFO  01:05:40,648 - Deklarisana promenljiva n na liniji 11
+INFO  01:05:40,648 - Deklarisana promenljiva m na liniji 11
+INFO  01:05:40,649 - Deklarisana promenljiva o na liniji 11
+INFO  01:05:40,650 - Generating bytecode file: D:\NiK\Faks2\PP1\pp1lab.templateAST\workspace\MJCompiler\test\program.obj

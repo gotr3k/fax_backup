@@ -1,0 +1,40 @@
+program test301
+
+	const int nula = 0;
+	const int jedan = 1;
+	const int pet = 5;
+
+	int niz[], niz2[], a, b;
+	char nizch[];
+	
+{
+	void main()	
+		int bodovi;
+		bool bt;
+	{
+		bodovi = 5 - (2 + 1); 
+		print(bodovi);
+		
+		niz = new int[3];
+		niz[0] = 1;
+		niz[1] = 3;
+		niz[2] = 6;
+		niz2 = new int[2];
+		
+		//[a,,b] = niz;
+
+		niz2[0] = 20;
+		niz2[1] = 21;
+		
+		//print(a);	// niz[0] -> 1
+		//print(b); // niz[2] -> 6 
+		
+		[niz2[1],,niz2[0]] = niz;
+		
+		print(niz2[0]);	// niz[0] -> 1
+		print(niz2[1]); // niz[1] -> 3 
+			
+	}
+}
+
+

@@ -1,0 +1,26 @@
+package application;
+
+public class Controller {
+
+	public void setMyIPA(){
+		
+	}
+	
+	public void setMySP(){
+		
+	}
+	
+	public void setServerIPA(){
+		
+	}
+	
+	public void setServerSP(){
+		
+	}
+	
+	public void startSubserver(){
+		
+	}
+	
+	
+}

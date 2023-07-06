@@ -1,0 +1,64 @@
+.left{
+  float:left;
+  width:33.4%;
+}
+
+.right{
+  float:left;
+  width:33.3%;
+}
+
+.mid{
+  float:left;
+  width:33.3%;
+}
+
+.card:hover{
+  cursor:pointer;
+  box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.5);
+}
+
+.card:hover mat-card-footer{
+  font-size:24px;
+  color:#283593;
+  padding-top:10px;
+}
+
+.card:hover img{
+  transform: scale(1.1);
+}
+
+.card img{
+  transition: all 0.5s ease;
+}
+.card mat-card-footer{
+  font-size:22px;
+  color:#5c6bc0;
+  text-align:center;
+  padding-bottom:20px;
+  font-weight:500;
+  transition: all 0.5s ease;
+}
+
+mat-card{
+    width:70%;
+    margin-top:100px;
+    margin-left:auto;
+    margin-right:auto;
+    overflow:hidden;   
+}
+
+@media (max-width:1500px){
+    .left, .mid, .right{
+        width:100%;
+    }
+
+    .right mat-card{
+      margin-bottom:60px;
+    }
+
+    mat-card{
+        margin-top:5%;
+        width:50%;
+    }
+}

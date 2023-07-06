@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="451.0" style="-fx-background-color: #d5f0d5;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="64.0" prefWidth="451.0" style="-fx-background-color: #a2bda2;" />
+      <Pane layoutX="21.0" layoutY="236.0" prefHeight="326.0" prefWidth="411.0" style="-fx-background-color: #233823; -fx-opacity: 0.1; -fx-background-radius: 8;" />
+      <Label alignment="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="451.0" text="Client">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Pane layoutX="21.0" layoutY="75.0" prefHeight="153.0" prefWidth="267.0" style="-fx-background-color: #233823; -fx-opacity: 0.1; -fx-background-radius: 8;" />
+      <Label layoutX="36.0" layoutY="91.0" text="Username">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="UsernameTextField" layoutX="145.0" layoutY="87.0" onAction="#setUsername" prefHeight="25.0" prefWidth="134.0" promptText="Username" />
+      <Label layoutX="36.0" layoutY="126.0" text="Password">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="PasswordTextField" layoutX="145.0" layoutY="122.0" onAction="#setPassword" prefHeight="25.0" prefWidth="134.0" promptText="Password" />
+      <Label layoutX="36.0" layoutY="161.0" text="Server IP address">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ServerIPATextField" layoutX="145.0" layoutY="157.0" onAction="#setServerIPA" prefHeight="25.0" prefWidth="134.0" />
+      <Label layoutX="36.0" layoutY="196.0" text="Server socket port">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ServerSPTextField" layoutX="145.0" layoutY="192.0" onAction="#setServerSP" prefHeight="25.0" prefWidth="134.0" />
+      <Button fx:id="ConnectButton" layoutX="313.0" layoutY="106.0" mnemonicParsing="false" onAction="#connect" style="-fx-cursor: hand;" text="Connect to Server">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="DisconnectButton" focusTraversable="false" layoutX="313.0" layoutY="106.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="25.0" prefWidth="117.0" style="-fx-cursor: hand;" text="Disconnect" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BuyButton" focusTraversable="false" layoutX="313.0" layoutY="141.0" mnemonicParsing="false" onAction="#buy" prefHeight="25.0" prefWidth="117.0" style="-fx-cursor: hand;" text="Buy Stocks" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="SellButton" focusTraversable="false" layoutX="313.0" layoutY="176.0" mnemonicParsing="false" onAction="#sell" prefHeight="25.0" prefWidth="117.0" style="-fx-cursor: hand;" text="Sell Stocks" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="36.0" layoutY="245.0" text="Stocks">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="StocksTextArea" editable="false" focusTraversable="false" layoutX="31.0" layoutY="287.0" prefHeight="138.0" prefWidth="391.0" />
+      <Label layoutX="36.0" layoutY="439.0" text="Logs">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="LogsTextArea" editable="false" focusTraversable="false" layoutX="31.0" layoutY="461.0" prefHeight="90.0" prefWidth="391.0" />
+      <Label layoutX="36.0" layoutY="270.0" prefHeight="17.0" prefWidth="48.0" text="Symbol" />
+      <Label layoutX="118.0" layoutY="270.0" prefHeight="17.0" prefWidth="48.0" text="Name" />
+      <Label layoutX="223.0" layoutY="270.0" prefHeight="17.0" prefWidth="48.0" text="Last" />
+      <Label layoutX="305.0" layoutY="270.0" prefHeight="17.0" prefWidth="134.0" text="Change Percentage" />
+   </children>
+</AnchorPane>

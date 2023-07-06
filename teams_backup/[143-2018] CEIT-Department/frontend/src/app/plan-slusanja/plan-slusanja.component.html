@@ -1,0 +1,41 @@
+<div class="telo">
+    <mat-spinner *ngIf="loading" style="margin:auto; margin-top:15%;"></mat-spinner>
+    <div *ngIf="!loading" class="container">
+        <div class="gore">
+            <h1>Plan slušanja za {{subject.code}}</h1>
+            <button mat-button class="btnObrisiSve" (click)="deleteAllEntries()">Obriši sve</button>       
+        </div>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+            <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header >Korisničko ime</th>
+                <td matt-cell *matCellDef="let slusanje" style="padding-left:25px; width:30%">{{slusanje.student.username}}</td>
+            </ng-container>
+            <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Br. Indeksa</th>
+                <td matt-cell *matCellDef="let slusanje" style="width:10%;">{{slusanje.student.index}}</td>
+            </ng-container>
+            <ng-container matColumnDef="surname">
+                <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Prezime</th>
+                <td matt-cell *matCellDef="let slusanje" style="width:15%;">{{slusanje.student.surname}}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:15%;">Ime</th>
+                <td matt-cell *matCellDef="let slusanje" style="width:15%;">{{slusanje.student.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width:20%;">Tip studija</th>
+                <td matt-cell *matCellDef="let slusanje" style="width:20%;">{{tipStudija(slusanje.student)}}</td>
+            </ng-container>
+            <ng-container  matColumnDef="add" >
+                <th mat-header-cell *matHeaderCellDef style="width:5%;"></th>
+                <td matt-cell style="text-align:center"  *matCellDef="let slusanje" style="width:5%;"><button *ngIf="!slusanje.added" mat-button class="btnDodaj" (click)="addStudent(slusanje)"><mat-icon>person_add</mat-icon></button></td>
+            </ng-container>
+            <ng-container  matColumnDef="remove">
+                <th mat-header-cell *matHeaderCellDef style="width:5%;"></th>
+                <td matt-cell style="text-align:center"  *matCellDef="let slusanje" style="width:5%;"><button *ngIf="slusanje.added" mat-button class="btnIzbaci" (click)="removeStudent(slusanje)"><mat-icon>person_remove</mat-icon></button></td>
+            </ng-container>    
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let slusanja; columns:columns"></tr>
+        </table>
+    </div>
+    </div>

@@ -1,0 +1,473 @@
+
+<mat-spinner *ngIf="loading" style="margin:auto; margin-top:15%;"></mat-spinner>
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Prva Godina - Prvi semestar</h1>
+        <button mat-button class="btnObrisiSve" (click)="deleteAllSubjects()">Obriši sve</button>
+        <button mat-button class="btnDodaj" (click)="addSubject()">Dodaj</button>
+    </div>
+    <table mat-table [dataSource]="dataSource11" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Prva Godina - Drugi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource12" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Druga Godina - Prvi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource21" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Druga Godina - Drugi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource22" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Treća Godina - Prvi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource31" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Treća Godina - Drugi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource32" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Četvrta Godina - Prvi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource41" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Četvrta Godina - Drugi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource42" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Master - Prvi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource51" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Master - Drugi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource52" matSort class="mat-elevation-z8 poslednja">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Odsek</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{odsek(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;">{{subject.espb}}</td>
+        </ng-container>
+        <ng-container matColumnDef="slu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnSlu" title="Plan slušanja" (click)="slu(subject)"><mat-icon>hearing</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="ang">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnAng" title="Plan angažovanja" (click)="ang(subject)"><mat-icon>record_voice_over</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnUpdate" title="Ažuriraj predmet" (click)="updateSubject(subject)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let subject"><button mat-button class="btnObrisi" title="Obriši predmet" (click)="deleteSubject(subject)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>

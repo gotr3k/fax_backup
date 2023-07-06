@@ -1,0 +1,22 @@
+<mat-spinner *ngIf="loading" style="margin:auto; margin-top:15%;"></mat-spinner>
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Osoblje</h1>   
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="fullName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime i prezime</th>
+            <td matt-cell *matCellDef="let employee" style="padding-left:25px;" (click)="goTo(employee)">{{employee.name}} {{employee.surname}}</td>
+        </ng-container>
+        <ng-container matColumnDef="rank">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Zvanje</th>
+            <td matt-cell *matCellDef="let employee" (click)="goTo(employee)">{{employee.rank}}</td>
+        </ng-container>
+        <!--<ng-container matColumnDef="predaje">
+            <th mat-header-cell *matHeaderCellDef>Drži nastavu na</th>
+            <td matt-cell style="text-align:center" *matCellDef="let employee" (click)="goTo(employee)">{{predaje(employee)}}</td>
+        </ng-container>-->
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row  *matRowDef="let employees; columns:columns" ></tr>
+    </table>    
+</div>

@@ -1,0 +1,45 @@
+<div class="telo">
+    <mat-card>
+    <mat-card-title>Postavi obaveštenje</mat-card-title>
+      <div class="polja-kolona">
+        <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Kategorija</mat-label>
+            <mat-select [(ngModel)]="kat" name="kategorija">
+              <mat-option *ngFor="let cat of cats" [value]="cat.oznaka">
+                {{cat.naziv}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Datum</mat-label>
+            <input matInput [matDatepicker]="picker" [max]="maxDate" [(ngModel)]="datum" [formControl]="datumControl" required>
+            <mat-error *ngIf="datumControl.invalid">{{getDatumErrorMessage()}}</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+        <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Naslov</mat-label>
+            <input matInput [(ngModel)]='naslov' autocomplete='off' (keyup)='deleteMessage()' [formControl]="naslovControl" required>
+            <mat-error *ngIf="naslovControl.invalid">{{getNaslovErrorMessage()}}</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Tekst</mat-label>
+            <textarea matInput [(ngModel)]='tekst' autocomplete='off' (keyup)='deleteMessage()' [formControl]="tekstControl" required></textarea>
+            <mat-error *ngIf="tekstControl.invalid">{{getTekstErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="dugme">
+        <button class="btnAdd" mat-button type='submit' (click)='add()'>Postavi</button>
+      </div>
+      <div *ngIf="errorMsg!=''" class="poruka err">
+        {{errorMsg}}
+      </div>
+      <div *ngIf="successMsg!=''" class="poruka succ">
+        {{successMsg}}
+      </div>
+    </mat-card>
+</div>

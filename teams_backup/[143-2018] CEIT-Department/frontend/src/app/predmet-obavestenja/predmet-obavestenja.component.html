@@ -1,0 +1,44 @@
+<div class="nav">
+    <mat-sidenav-container>
+    <mat-sidenav mode="side" role="navigation" opened="true" disableClose="true">
+        <button class="btnBack" mat-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+        <ul>     
+            <li><a (click)="goToOb()" class="active">Obaveštenja</a></li>
+            <li><a (click)="goToO()">O predmetu</a></li>        
+            <li><a (click)="goToP()">Predavanja</a></li>
+            <li><a (click)="goToV()">Vežbe</a></li>
+            <li *ngIf="subject.labVisible"><a (click)="goToL()" >Laboratorija</a></li>
+            <li *ngIf="subject.projectVisible"><a (click)="goToD()" >Projekat</a></li>
+            <li *ngIf="subject.examVisible"><a (click)="goToI()">Ispitna pitanja</a></li>
+            <li><a (click)="goToS()">Spiskovi</a></li>
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="gore">
+            <h1>Obaveštenja</h1>   
+        </div>
+        <div class="sredina">
+            <mat-accordion multi="true">
+                <mat-expansion-panel *ngFor="let obavestenje of obavestenja">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="pom">
+                        {{obavestenje.subjectNotice.date}}&nbsp;
+                        </div>
+                        <div class="naslov">{{obavestenje.subjectNotice.title}}</div>                    
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p>{{obavestenje.subjectNotice.notice}}</p>
+                  <span *ngIf="obavestenje.files.length>0">Fajlovi:</span>
+                  <ul class="fileList">
+                    <li *ngFor="let file of obavestenje.files"><a (click)="download(file)">{{file.fileName}}</a></li>
+                  </ul>
+                </mat-expansion-panel>
+              </mat-accordion>
+        </div>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+    

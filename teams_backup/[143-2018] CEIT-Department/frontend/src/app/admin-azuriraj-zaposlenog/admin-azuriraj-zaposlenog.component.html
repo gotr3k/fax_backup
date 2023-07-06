@@ -1,0 +1,81 @@
+<div class="telo">
+    <mat-card>
+    <mat-card-title>Ažuriranje</mat-card-title>
+      <div class="polja-kolona">
+        <img class="avatar" [src]="imageSrc || '../../assets/images/osoba.png'" alt="Employee's avatar" />
+        <div class="fileUpload"> 
+          <input #fileInput type="file">
+          <button mat-button class ="btnUpload" (click)="addFile()">Upload</button>
+        </div>
+        <div *ngIf="uploadErrMsg!=''" class="poruka err">
+          {{uploadErrMsg}}
+        </div>
+        <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Korisničko ime</mat-label>
+            <input matInput [(ngModel)]='username'  autocomplete='off' (keyup)='deleteMessage()' [formControl]="usernameControl" required>
+            <mat-error *ngIf="usernameControl.invalid">{{getUsernameErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <div class="polja-horiz2">
+            <mat-form-field appearance="fill" style="margin-right:1%; width:49%;">
+                <mat-label>Ime</mat-label>
+                <input matInput [(ngModel)]='ime' autocomplete='off' (keyup)='deleteMessage()' [formControl]="imeControl" required>
+                <mat-error *ngIf="imeControl.invalid">{{getImeErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="margin-left:1%; width:49%;">
+                <mat-label>Prezime</mat-label>
+                <input matInput [(ngModel)]='prezime' autocomplete='off' (keyup)='deleteMessage()' [formControl]="prezimeControl" required>
+                <mat-error *ngIf="prezimeControl.invalid">{{getPrezimeErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+        <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Zvanje</mat-label>
+            <mat-select [(ngModel)]="rank" name="rank">
+              <mat-option *ngFor="let rank of ranks" [value]="rank.naziv">
+                {{rank.naziv}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Adresa</mat-label>
+            <input matInput [(ngModel)]='address' autocomplete='off' (keyup)='deleteMessage()' [formControl]="addressControl" required>
+            <mat-error *ngIf="addressControl.invalid">{{getAddressErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Kabinet</mat-label>
+            <input matInput [(ngModel)]='room' autocomplete='off' (keyup)='deleteMessage()' [formControl]="roomControl" required>
+            <mat-error *ngIf="roomControl.invalid">{{getRoomErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Br. Telefona</mat-label>
+            <input matInput [(ngModel)]='phone' autocomplete='off' (keyup)='deleteMessage()'>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Veb sajt</mat-label>
+            <input matInput [(ngModel)]='website' autocomplete='off' (keyup)='deleteMessage()'>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Status</mat-label>
+            <mat-select [(ngModel)]="status" name="rank">
+              <mat-option *ngFor="let status of statusi" [value]="status.oznaka">
+                {{status.naziv}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="dugme">
+        <button class="btnUpdate" mat-button type='submit' (click)='update()'>Sačuvaj</button>
+      </div>
+      <div *ngIf="errorMsg!=''" class="poruka err">
+        {{errorMsg}}
+      </div>
+      <div *ngIf="successMsg!=''" class="poruka succ">
+        {{successMsg}}
+      </div>
+    </mat-card>
+    </div>

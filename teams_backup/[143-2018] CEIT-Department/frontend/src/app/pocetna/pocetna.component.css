@@ -1,0 +1,161 @@
+.pocetna::after{
+  display: table;
+  clear: both;
+}
+
+
+.levo{
+    float: left;
+    width: 30%;
+    height:100%;
+    background-color: #e8eaf6;
+}
+
+.desno{
+    float:right;
+    width:70%;
+    height:100%;
+}
+
+.levoAdmin{
+  float:left;
+  width:33.4%;
+  height:100%;
+  background-color:#e8eaf6;
+}
+
+.sredinaAdmin{
+  float:left;
+  width:33.3%;
+  height:100%;
+  background-color:#e8eaf6;
+}
+.desnoAdmin{
+  float:left;
+  width:33.3%;
+  height:100%;
+  background-color:#e8eaf6;
+}
+
+.adminKartica:hover, .employeeCard:hover{
+  cursor:pointer;
+  box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.5);
+}
+
+.adminKartica:hover mat-card-footer, .employeeCard:hover mat-card-footer{
+  font-size:24px;
+  color:#283593;
+  padding-top:10px;
+}
+
+.adminKartica:hover img, .employeeCard:hover img{
+  transform: scale(1.1);
+}
+
+.adminKartica img, .employeeCard img{
+  transition: all 0.5s ease;
+}
+.adminKartica mat-card-footer, .employeeCard mat-card-footer{
+  font-size:22px;
+  color:#5c6bc0;
+  text-align:center;
+  padding-bottom:20px;
+  font-weight:500;
+  transition: all 0.5s ease;
+}
+
+.text{
+  text-align:center;
+  font-size:16px;
+}
+
+a{
+  text-decoration: underline;
+  color:rgb(12, 130, 185);
+}
+
+a:hover{
+  cursor:pointer;
+}
+
+mat-card{
+    width:70%;
+    margin-top:15%;
+    margin-left:auto;
+    margin-right:auto;
+    overflow:hidden;   
+}
+
+mat-card-title{
+    padding-top:10px;
+    color:#283593;
+    text-align:center;
+}
+
+.container{
+  margin:auto;
+  width:100%;
+  background-color:#e8eaf6;
+}
+
+table{
+  margin:auto;
+  margin-top:1%;
+  width:80%;
+}
+
+.poslednja{
+  padding-bottom:45px;
+}
+
+h1{
+  display:inline-block;
+  padding-left:10%;
+  margin:auto;
+  padding-top:1%;
+  font-size:30px;
+  color:#283593;
+}
+
+.mat-row:hover{
+  background-color:#c5cae9;
+  cursor:pointer;
+}
+
+.leftEmployee{
+  float:left;
+  width:50%;
+  background-color:#e8eaf6;
+  transform: translateX(75px);
+}
+
+
+.rightEmployee{
+  float:left;
+  width:50%;
+  background-color:#e8eaf6;
+  transform: translateX(-75px);
+}
+
+.employeeCard{
+  width:50%;
+  margin-top:100px;
+
+  overflow:hidden;   
+}
+
+@media (max-width:1500px){
+  .leftEmployee, .rightEmployee{
+      width:100%;
+      transform: translateX(0px);
+  }
+
+  .rightEmployee mat-card{
+    margin-bottom:60px;
+  }
+
+  .rightEmployee mat-card, .leftEmployee mat-card{
+      margin-top:5%;
+      width:50%;
+  }
+}

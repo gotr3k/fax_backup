@@ -1,0 +1,183 @@
+package application;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.Semaphore;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+import javafx.application.Platform;
+
+public class RequestServant extends Thread{
+
+	private Socket socket;
+	private static LinkedBlockingQueue<Vector<String>> requests;
+	private static LinkedBlockingQueue<Vector<String>> stocks;
+	private ObjectOutputStream oos;
+	private ObjectInputStream ois;
+	static Semaphore semaphoreATTA=new Semaphore(1);	//awaiting trans.
+	static Semaphore semaphoreCTTA=new Semaphore(1);	//completed trans.
+	static Semaphore semaphoreLTA=new Semaphore(1);		//logs
+	static Semaphore semaphoreSTA=new Semaphore(1);		//stocks text area
+	
+	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
+	@FXML
+	private static TextArea LogsTextArea;
+	
+	@FXML
+	private static TextArea CompletedTransactionsTextArea;
+	
+	@FXML
+	private static TextArea AwaitingTransactionsTextArea;
+	
+	@FXML
+	private static TextArea StocksTextArea;
+	
+	RequestServant(Socket s, LinkedBlockingQueue<Vector<String>> reqQ, LinkedBlockingQueue<Vector<String>> stkQ, TextArea AT, TextArea CT, TextArea ST, TextArea L){
+		this.socket=s;
+		requests=reqQ; //CHECK
+		stocks=stkQ; //CHECK
+		CompletedTransactionsTextArea=CT;
+		AwaitingTransactionsTextArea=AT;
+		LogsTextArea=L;
+		StocksTextArea=ST;
+	}
+	
+	@Override
+	public void run() {
+        try {
+        	oos = new ObjectOutputStream(socket.getOutputStream());
+        	ois = new ObjectInputStream(socket.getInputStream());
+
+        	//Vector<String> temp = (Vector<String>)ois.readObject();
+        	//String operation=temp.remove(0);
+        	String operation=(String)ois.readObject();				//first string is always name of the operation
+        	
+        	Platform.runLater(()->{
+        		semaphoreLTA.acquireUninterruptibly();
+        		LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Accepted '"+operation+"' request from "
+        				+socket.getInetAddress().toString().substring(1)
+        				+"/"+socket.getPort()+"\n\n");
+        		semaphoreLTA.release();
+        	});
+        	
+        	switch(operation) {
+        		case "get requests":{	//each request is [username, operation, amount, stock name]
+        			requests.forEach(request->{
+        				try {
+							oos.writeObject(request);
+							oos.flush();
+							Platform.runLater(()->{
+								semaphoreLTA.acquireUninterruptibly();
+					    		LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Sent request "
+					    				+request+" to server\n\n");
+					    		semaphoreLTA.release();
+							});
+						} catch (IOException e) {
+							Platform.runLater(()->{
+								semaphoreLTA.acquireUninterruptibly();
+					    		LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot send requests to the server\n"
+					    				+"Error: "+e.toString()+"\n\n");
+					    		semaphoreLTA.release();
+							});
+							
+						}
+        				
+        			});
+        			Vector<String> end=new Vector<String>();
+        			end.add("end");
+        			oos.writeObject(end);
+        			oos.flush();
+        			Platform.runLater(()->{
+						semaphoreLTA.acquireUninterruptibly();
+			    		LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Sent 'end' to server\n\n");
+			    		semaphoreLTA.release();
+					});
+        			oos.close();
+    				ois.close();
+    				socket.close();
+        			break;
+        		}
+        		case "get stocks":{
+        			stocks.forEach(stock->{
+        				try {
+							oos.writeObject(stock);
+							oos.flush();
+						} catch (IOException e) {
+							Platform.runLater(()->{
+								semaphoreLTA.acquireUninterruptibly();
+				    			LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot send stocks to the server\n"
+				    					+"Error: "+e.toString()+"\n\n");
+				    			semaphoreLTA.release();
+							});
+						}       				
+        			});
+        			oos.writeObject("end");
+        			oos.flush();
+        			oos.close();
+    				ois.close();
+    				socket.close();
+        			break;
+        		}
+        		case "insert data":{
+        			Platform.runLater(()->{
+        			semaphoreATTA.acquireUninterruptibly();
+            		AwaitingTransactionsTextArea.clear();
+            		semaphoreATTA.release();
+            		
+            		semaphoreCTTA.acquireUninterruptibly();
+            		CompletedTransactionsTextArea.clear();
+            		semaphoreCTTA.release();
+            		
+            		semaphoreSTA.acquireUninterruptibly();
+            		StocksTextArea.clear();
+            		semaphoreSTA.release();
+        			});
+        			String receiver="";
+        			while(!receiver.equalsIgnoreCase("end")) {
+        				receiver=(String)ois.readObject();
+        				if(receiver.equalsIgnoreCase("stock")) {
+        					Vector<String> stockReader = (Vector<String>)ois.readObject();
+        					RequestServant.stocks.offer(stockReader);
+        					Platform.runLater(()->{
+        						semaphoreSTA.acquireUninterruptibly();
+        						StocksTextArea.appendText(stockReader.elementAt(0)+"\t\t"+stockReader.elementAt(1)+"\t\t\t"+stockReader.elementAt(2)+"\t\t"+stockReader.elementAt(3)+"\n");
+        						semaphoreSTA.release();
+        					});
+        				} else if(receiver.equalsIgnoreCase("request")) {
+        					Vector<String> requestReader = (Vector<String>)ois.readObject();
+        					RequestServant.requests.offer(requestReader);
+        					Platform.runLater(()->{
+        						semaphoreATTA.acquireUninterruptibly();
+        						AwaitingTransactionsTextArea.appendText(requestReader.elementAt(0)+" "
+        								+requestReader.elementAt(1)+" "
+        								+requestReader.elementAt(2)+" "
+        								+requestReader.elementAt(3)+"\n");
+        						semaphoreATTA.release();
+        					});
+        				}
+        			}
+        			oos.close();
+    				ois.close();
+    				socket.close();
+        			break;
+        		}
+        	}
+        } catch (Exception ex) {
+        	Platform.runLater(()->{
+        		semaphoreLTA.acquireUninterruptibly();
+        		LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot establish communication with the server\n"
+        				+"Error: "+ex.toString()+"\n\n");
+        		semaphoreLTA.release();
+        	});
+        }
+	}
+}

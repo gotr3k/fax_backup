@@ -1,0 +1,46 @@
+<mat-spinner *ngIf="loading" style="margin:auto; margin-top:15%;"></mat-spinner>
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Zaposleni</h1>
+        <button mat-button class="btnObrisiSve" (click)="deleteAllEmployees()">Obriši sve</button>
+        <button mat-button class="btnDodaj" (click)="addEmployee()">Dodaj</button>     
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Korisničko ime</th>
+            <td matt-cell *matCellDef="let employee" style="padding-left:25px;">{{employee.username}}</td>
+        </ng-container>
+        <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prezime</th>
+            <td matt-cell *matCellDef="let employee">{{employee.surname}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime</th>
+            <td matt-cell *matCellDef="let employee">{{employee.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="rank">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Zvanje</th>
+            <td matt-cell *matCellDef="let employee">{{employee.rank}}</td>
+        </ng-container>
+        <ng-container matColumnDef="room">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Kabinet</th>
+            <td matt-cell *matCellDef="let employee">{{employee.room}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td matt-cell *matCellDef="let employee">{{status(employee)}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let employee"><button mat-button class="btnUpdate" (click)="updateEmployee(employee)"><mat-icon>upgrade</mat-icon></button></td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td matt-cell style="text-align:center" *matCellDef="let employee"><button mat-button class="btnObrisi" (click)="deleteEmployee(employee)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let employees; columns:columns"></tr>
+    </table>
+</div>

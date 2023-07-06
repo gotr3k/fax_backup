@@ -1,0 +1,146 @@
+package application;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
+public class RequestListener {
+	private static ServerSocket serverSocket;
+	private static Socket socket;
+	private static AtomicBoolean subserverIsRunning=new AtomicBoolean(false);
+	private static ObjectOutputStream oos;
+	private static ObjectInputStream ois;
+	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
+	private static String myIPA;
+	private static InetAddress myInetAddress;
+	private static int mySP;
+	
+	@FXML
+	private static TextArea AwaitingTransactionsTextArea;
+	
+	@FXML
+	private static TextArea CompletedTransactionsTextArea;
+	
+	@FXML
+	private static TextArea StocksTextArea;
+	
+	@FXML
+	private static TextArea LogsTextArea;
+	
+	public static LinkedBlockingQueue<Vector<String>> requestQueue = new LinkedBlockingQueue<Vector<String>>();	//blocking queue for connection requests that come from clients and subservers (ipa, port, type, operation, username/stockname, password/amount)	
+	public static LinkedBlockingQueue<Vector<String>> stocksQueue=new LinkedBlockingQueue<Vector<String>>();		//queue in which stocks are stored (name, price, subserver ipa, subserver port)
+
+	RequestListener(String ipa, int sp, TextArea Logs, TextArea Stocks, TextArea Awaiting, TextArea Compl){
+		myIPA=ipa;
+		try {
+			myInetAddress=InetAddress.getByName(ipa);
+		} catch (UnknownHostException e) {
+			Platform.runLater(()->{
+				LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot convert IP address to InetAddress Object!\n"
+						+"Error: "+e.toString()+"\n\n");
+			});
+		}
+		mySP=sp;
+		LogsTextArea=Logs;
+		StocksTextArea=Stocks;
+		AwaitingTransactionsTextArea=Awaiting;
+		CompletedTransactionsTextArea=Compl;
+		
+	}
+	
+	public void listenToRequests() {
+		Runnable r=()->{
+			subserverIsRunning.set(true);
+			try {
+				serverSocket=new ServerSocket(mySP, 1, myInetAddress);
+				Platform.runLater(()->{
+					LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Created server socket on "
+							+serverSocket.getInetAddress().toString().substring(1, serverSocket.getInetAddress().toString().length())
+							+"/"+serverSocket.getLocalPort()+"\n\n");
+					LogsTextArea.appendText("["+dateFormat.format(new Date())+"] SERVER IS ONLINE\n\n");
+				//setUI();
+				});
+			} catch (IOException e) {
+				subserverIsRunning.set(false);
+				requestQueue.clear();
+				stocksQueue.clear();
+				Platform.runLater(()->{
+					LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot create subserver socket!\n"
+							+"Error: "+e.toString()+"\n\n");
+					LogsTextArea.appendText("["+dateFormat.format(new Date())+"] SERVER IS OFFLINE\n\n");
+					AwaitingTransactionsTextArea.clear();
+					CompletedTransactionsTextArea.clear();
+					//setUI();
+				});
+			}
+			
+			while(subserverIsRunning.get()) {
+				try {
+					Platform.runLater(()->{
+						LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Listening for requests...\n\n");
+					});
+					socket=serverSocket.accept();
+					RequestServant reqServant=new RequestServant(socket, requestQueue, stocksQueue, AwaitingTransactionsTextArea, CompletedTransactionsTextArea, StocksTextArea, LogsTextArea);
+					reqServant.start();
+				} catch (IOException e) {
+					if(subserverIsRunning.get()) {
+						Platform.runLater(()->{
+							LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot establish any connections!\n"
+									+"Error: "+e.toString()+"\n\n");
+						});
+					}
+				}
+			}
+		};
+		Thread t=new Thread(r);
+		t.start();
+	}
+	
+	
+	public void stopListeningToRequests() {
+		Runnable r=()->{
+			subserverIsRunning.set(false);
+			try {
+				serverSocket.close();				
+				Platform.runLater(()->{
+					//StocksTextArea.clear();
+					LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Closed server socket on "
+							+serverSocket.getInetAddress().toString().substring(1, serverSocket.getInetAddress().toString().length())
+							+"/"+serverSocket.getLocalPort()+"\n\n");
+					LogsTextArea.appendText("["+dateFormat.format(new Date())+"] SERVER IS OFFLINE\n\n");
+					requestQueue.clear();
+					stocksQueue.clear();
+					//setUI();
+				});
+			} catch (IOException e) {
+				subserverIsRunning.set(true);
+				Platform.runLater(()->{
+					LogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot close server socket!\n"
+							+"Error: "+e.toString()+"\n\n");
+					LogsTextArea.appendText("["+dateFormat.format(new Date())+"] SERVER IS STILL ONLINE\n\n");	
+					//setUI();
+				});
+			}
+		};
+		Thread t=new Thread(r);
+		t.start();
+	}
+	
+}

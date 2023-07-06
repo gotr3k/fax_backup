@@ -1,0 +1,54 @@
+Symbol Table
+Value	Type	Bind	Section	Name
+0	SCTN	LOCL	bss	bss
+0	SCTN	LOCL	data	data
+8	NOTYP	LOCL	data	e
+0	SCTN	LOCL	text	text
+0	NOTYP	EXTN	UND	b
+14	NOTYP	LOCL	text	d
+e	NOTYP	GLOB	data	a
+0	NOTYP	GLOB	bss	c
+
+Data of: text
+0 : 50 ff
+2 : f0 0
+4 : 0 50
+6 : ff f0
+8 : 0 0
+a : 50 ff
+c : f0 0
+e : 0 50
+10 : ff f0
+12 : 0 0
+14 : 0 0
+Relocation of: text
+Offset	Type	Symbol	Addent
+3	R_WORD	a	0
+8	R_WORD	data	8
+d	R_WORD	b	0
+12	R_WORD	text	14
+14	R_WORD	text	14
+
+Data of: data
+0 : 0 0
+2 : 0 0
+4 : 0 0
+6 : 0 0
+8 : 0 0
+a : 0 0
+c : 0 0
+e : 0 0
+Relocation of: data
+Offset	Type	Symbol	Addent
+8	R_WORD	data	8
+a	R_WORD	c	0
+c	R_WORD	bss	0
+e	R_WORD	b	0
+
+Data of: bss
+0 : 0 0
+2 : 0 0
+4 : 0 0
+6 : 0 0
+Relocation of: bss
+Offset	Type	Symbol	Addent

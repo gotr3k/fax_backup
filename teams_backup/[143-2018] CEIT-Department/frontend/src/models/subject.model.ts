@@ -1,0 +1,20 @@
+export interface Subject{
+    id:number,
+    code:string,
+    name:string,
+    department:number,
+    semester:number,
+    espb:number,
+    type:number,
+    lectures:number,
+    exc:number,
+    lab:number,
+    goal:string,
+    result:string,
+    lectureWhen:string,
+    excWhen:string,
+    comment:string,
+    examVisible:boolean,
+    labVisible:boolean,
+    projectVisible:boolean
+}

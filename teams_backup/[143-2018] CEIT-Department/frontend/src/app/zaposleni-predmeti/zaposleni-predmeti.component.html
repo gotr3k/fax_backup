@@ -1,0 +1,30 @@
+<mat-spinner *ngIf="loading" style="margin:auto; margin-top:15%;"></mat-spinner>
+        <div *ngIf="!loading" class="container">
+            <div class="gore">
+                <h1>Moji predmeti</h1>
+            </div>
+            <table mat-table [dataSource]="dataSourceEmployee" matSort class="mat-elevation-z8 poslednja">
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+                    <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="fromEmployeeGoToSubject(subject)">{{subject.code}}</td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+                    <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="fromEmployeeGoToSubject(subject)">{{subject.name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="department">
+                    <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Odsek</th>
+                    <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="fromEmployeeGoToSubject(subject)">{{odsek(subject)}}</td>
+                </ng-container>
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+                    <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="fromEmployeeGoToSubject(subject)">{{tipPredmeta(subject)}}</td>
+                </ng-container>
+                <ng-container matColumnDef="espb">
+                    <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+                    <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="fromEmployeeGoToSubject(subject)">{{subject.espb}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+            </table>
+        </div>

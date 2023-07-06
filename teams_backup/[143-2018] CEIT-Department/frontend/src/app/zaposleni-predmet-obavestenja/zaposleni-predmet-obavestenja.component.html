@@ -1,0 +1,51 @@
+<div class="nav">
+    <mat-sidenav-container>
+    <mat-sidenav mode="side" role="navigation" opened="true" disableClose="true">
+        <button class="btnBack" mat-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+        <ul>     
+            <li><a (click)="goToO()" >O predmetu</a></li>
+            <li><a (click)="goToOb()" class="active">Obaveštenja</a></li>
+            <li><a (click)="goToP()">Predavanja</a></li>
+            <li><a (click)="goToV()">Vežbe</a></li>
+            <li><a (click)="goToL()">Laboratorija</a></li>
+            <li><a (click)="goToD()">Projekat</a></li>
+            <li><a (click)="goToI()">Ispitna pitanja</a></li>
+            <li><a (click)="goToS()">Spiskovi</a></li>
+            
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="gore">
+            <h1>Obaveštenja</h1>
+            <button  mat-button class="btnObrisiSve" (click)="deleteAllNotices()">Obriši sve</button>
+            <button  mat-button class="btnDodaj" (click)="addNotice()">Dodaj</button>          
+        </div>
+        <div class="sredina">
+            <mat-accordion multi="true">
+                <mat-expansion-panel *ngFor="let obavestenje of obavestenja">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="pom">
+                        {{obavestenje.subjectNotice.date}}&nbsp;
+                        </div>
+                        <div class="naslov">{{obavestenje.subjectNotice.title}}</div>                    
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="buttons">
+                        <button class="btnUpdate" (click)="updateNotice(obavestenje.subjectNotice)"><mat-icon>upgrade</mat-icon></button>
+                        <button class="btnObrisi" (click)="deleteNotice(obavestenje.subjectNotice)"><mat-icon>delete</mat-icon></button>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p>{{obavestenje.subjectNotice.notice}}</p>
+                  <span *ngIf="obavestenje.files.length>0">Fajlovi:</span>
+                  <ul class="fileList">
+                    <li *ngFor="let file of obavestenje.files"><a (click)="download(file)">{{file.fileName}}</a></li>
+                  </ul>
+                </mat-expansion-panel>
+              </mat-accordion>
+        </div>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+    </div>
+    

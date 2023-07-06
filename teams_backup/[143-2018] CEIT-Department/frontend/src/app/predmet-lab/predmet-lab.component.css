@@ -1,0 +1,91 @@
+.nav{
+    height:100%;
+}
+mat-sidenav-container{
+    height:100%;
+    z-index:0;
+}
+
+mat-sidenav{
+    width:200px;
+}
+
+ul{
+    padding-top:40px;
+    font-size:22px;
+    list-style-type:none;
+    margin-left:0;
+}
+
+li{
+    padding-bottom:30px;
+}
+
+a{
+    color:rgb(12, 130, 185);
+}
+
+a:hover{
+    color:#283593;
+    cursor: pointer;
+}
+
+.active{
+    text-decoration: underline;
+    color:#212121;
+}
+
+a:active{
+    text-decoration: underline;
+    color:#212121;
+}
+
+.btnBack{
+    color:white;
+    background-color:#3f51b5;
+    margin-top:60px;
+    width:70px;
+    margin-left:65px;
+}
+
+.btnBack:hover{
+    background-color:#283593;
+}
+
+table{
+    margin:auto;
+    margin-top:1%;
+    width:80%;
+}
+
+.poslednja{
+    padding-bottom:45px;
+}
+
+h1{
+    display:inline-block;
+    padding-left:10%;
+    margin:auto;
+    padding-top:30px;
+    font-size:30px;
+    color:#283593;
+}
+
+.fileUpload{
+    padding-top:30px;
+    padding-left:10%;
+}
+.btnObrisi:hover{
+    color: #f44336;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+.btnUpload{
+    background-color: #e91e63;
+    color: #ffffff;
+}

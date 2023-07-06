@@ -1,0 +1,73 @@
+.naslov{
+    font-size:40px;
+    padding-left:15%;
+}
+
+mat-toolbar{
+    height:110px;
+}
+.prvi-red{
+    height:10px;
+}
+.drugi-red{
+    background-image:linear-gradient(rgba(63, 81, 181, 0.8), rgba(63, 81, 181, 0.7)), url("src/assets/images/headerWhite.jpg");
+    color:white;
+    height:100px;
+}
+
+.logos{
+    padding-right:15%;
+    padding-top: 11px;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+.slika{
+    height:80px;
+    width:auto;
+    margin-left:15px;
+}
+
+img{
+    opacity:0.8;
+}
+img:hover{
+    opacity:1;
+}
+
+.large-view{
+    display:inline-block;
+ }
+ 
+ .small-view{
+    display:none;
+ }
+
+
+
+@media (max-width:1600px){
+    .large-view{
+        padding-left:5%;
+    }
+}
+@media (max-width:1400px){
+    .large-view{
+        display:none;
+    }
+     
+    .small-view{
+        display:inline-block;
+        padding-left:5%;
+    }
+
+    .logos{
+        padding-right:5%;
+    }
+}
+@media (max-width:800px){
+    .small-view{
+        padding-left:5px;
+    }
+}

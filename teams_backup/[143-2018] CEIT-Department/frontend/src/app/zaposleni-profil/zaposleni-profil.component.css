@@ -1,0 +1,58 @@
+
+
+.polja-kolona{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+mat-card{
+    margin:auto;
+    margin-top:1%;
+    padding-bottom:40px;
+    width:30%;
+}
+
+mat-icon-button{
+    border:none!important;
+}
+
+.dugme{
+    margin-top:10px;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+textarea{
+    height:150px;
+    max-height:200px;
+    min-height:100px;
+}
+
+.btnUpdate{
+    background-color: #e91e63;
+    color: #ffffff;
+}
+
+.poruka{
+    text-align:center;
+    font-size:16px;
+    font-weight:500;
+    margin-bottom:10px;
+}
+
+.err{
+    color: #f44336;
+}
+
+.succ{
+    color:#4caf50;
+}
+
+mat-card-title{
+    padding-top:10px;
+    color:#283593;
+    text-align:center;
+    margin-bottom:35px;
+}

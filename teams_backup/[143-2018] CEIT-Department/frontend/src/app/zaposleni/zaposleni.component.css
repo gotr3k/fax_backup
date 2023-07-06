@@ -1,0 +1,55 @@
+.container{
+    width:100%;
+    background-color:#e8eaf6;
+}
+
+table{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:1%;
+    width:40%;
+    padding-bottom:45px;
+}
+
+h1{
+    display:inline-block;
+    padding-left:30%;
+    margin:auto;
+    padding-top:2%;
+    font-size:30px;
+    color:#283593;
+}
+
+.mat-row:hover{
+    background-color:#c5cae9;
+    cursor:pointer;
+}
+
+
+.btnObrisiSve{
+    float:right;
+    margin-top:1%;
+    margin-right:10%;
+    background-color:#f44336;
+    color: #ffffff;
+    width:100px;
+}
+
+.btnDodaj{
+    float:right;
+    margin-top:1%;
+    margin-right:2%;
+    background-color:#4caf50;
+    color: #ffffff;
+    width:100px;
+}
+
+.btnObrisi{
+    background-color:#f44336;
+    color: #ffffff;
+}
+
+.btnUpdate{
+    background-color:#3f51b5;
+    color: #ffffff;
+}

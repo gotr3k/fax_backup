@@ -1,0 +1,72 @@
+package application;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
+public class Controller {
+	static final int upperBoundSP=65535;				//upper bound for socket ports
+	static final int lowerBoundSP=49512;				//lower bound for socket ports
+	
+	@FXML
+	private TextField MyIPATextField;
+	private String myIPA;
+	
+	@FXML
+	private TextField MySPTextField;
+	
+	@FXML
+	private TextField ServerIPATextField;
+	private String serverIPA;
+	
+	@FXML
+	private TextField ServerSPTextField;
+	
+	@FXML
+	private Button StartSubserverButton;
+	
+	@FXML
+	private Button StopSubserverButton;
+	
+	@FXML
+	private TextArea AwaitingTransactionsTextArea;
+	
+	@FXML
+	private TextArea CompletedTransactionsTextArea;
+	
+	@FXML
+	private TextArea StocksTextArea;
+	
+	@FXML
+	private TextArea LogsTextArea;
+	
+	@FXML
+    public void initialize() {							//on form load
+		
+	}
+	
+	public void setMyIPA(){
+		
+	}
+	
+	public void setMySP(){
+		
+	}
+	
+	public void setServerIPA(){
+		
+	}
+	
+	public void setServerSP(){
+		
+	}
+	
+	public void startSubserver(){
+		
+	}
+	
+	public void stopSubserver() {
+		
+	}
+}

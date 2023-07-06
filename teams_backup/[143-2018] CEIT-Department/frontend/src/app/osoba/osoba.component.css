@@ -1,0 +1,93 @@
+.container{
+    width:100%;
+}
+
+.gore{
+    margin:auto;
+    margin-top:40px;
+    width:100%;
+    display:inline-flex;
+    justify-content: center;
+}
+
+.sredina{
+    margin:auto;
+    margin-top:20px;
+    width:100%;
+    display:inline-flex;
+    justify-content: center;
+
+}
+
+.dole{
+    text-align:center;
+    margin:auto;
+    margin-top:20px;
+    width:100%;
+}
+
+.desno{
+    margin-left:15px;
+    padding-top:20px;
+}
+
+table{
+    margin:auto;
+    width:20%;
+    transform:translateX(105px);
+}
+img{
+    border:1px solid #7986cb;
+}
+h1, h2, h5{
+    color:#1a237e;
+}
+
+h3{
+    color:#303f9f;
+}
+
+h4{
+    color:#7986cb;
+}
+
+h1{
+    font-size:32px;
+}
+
+h2{
+    transform: translateX(-20px);
+    font-size:28px;
+}
+
+h3{
+    font-size:24px;
+}
+
+h4{
+    font-size:20px;
+}
+
+h5{
+    font-size:16px;
+}
+
+a{
+    text-decoration: underline;
+    color:rgb(12, 130, 185);
+}
+
+ul{
+    list-style-type: none;
+    font-size:20px;
+    transform: translateX(-40px);
+}
+
+li{
+    margin-top:10px;
+}
+
+li a{
+    cursor:pointer;
+    color:#303f9f;
+}

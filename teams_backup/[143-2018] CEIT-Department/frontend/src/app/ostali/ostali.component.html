@@ -1,0 +1,216 @@
+
+<mat-spinner *ngIf="loading" style="margin:auto; margin-top:15%;"></mat-spinner>
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Prva Godina - Prvi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource11" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="goTo(subject)">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="goTo(subject)">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="goTo(subject)">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="goTo(subject)">{{subject.espb}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Prva Godina - Drugi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource12" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="goTo(subject)">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="goTo(subject)">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="goTo(subject)">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="goTo(subject)">{{subject.espb}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Druga Godina - Prvi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource21" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="goTo(subject)">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="goTo(subject)">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="goTo(subject)">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="goTo(subject)">{{subject.espb}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Druga Godina - Drugi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource22" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="goTo(subject)">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="goTo(subject)">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="goTo(subject)">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="goTo(subject)">{{subject.espb}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Treća Godina - Prvi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource31" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="goTo(subject)">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="goTo(subject)">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="goTo(subject)">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="goTo(subject)">{{subject.espb}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Treća Godina - Drugi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource32" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="goTo(subject)">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="goTo(subject)">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="goTo(subject)">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="goTo(subject)">{{subject.espb}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Četvrta Godina - Prvi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource41" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="goTo(subject)">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="goTo(subject)">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="goTo(subject)">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="goTo(subject)">{{subject.espb}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <div class="gore">
+        <h1>Četvrta Godina - Drugi semestar</h1>
+    </div>
+    <table mat-table [dataSource]="dataSource42" matSort class="mat-elevation-z8 poslednja">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="goTo(subject)">{{subject.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+            <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="goTo(subject)">{{subject.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+            <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="goTo(subject)">{{tip(subject)}}</td>
+        </ng-container>
+        <ng-container matColumnDef="espb">
+            <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+            <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="goTo(subject)">{{subject.espb}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+    </table>
+</div>

@@ -1,0 +1,1 @@
+Posto nisam imao regarsko adresiranje, sve pokazivace i pomocne promenljive sam skladistio u memoriji pa je zbog toga potrebno mnogo taktova da bi se program izvrsio. Za konkretan primer iz pdf dokumenta Clk=53295 . 

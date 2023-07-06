@@ -1,0 +1,61 @@
+<!-- <app-header></app-header>
+<div class="navbar" color="primary">
+  <a routerLink='' [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Početna</a>
+  <a routerLink='/zaposleni' [routerLinkActive]="['active']">Zaposleni</a>
+  <a routerLink='/obavestenja' [routerLinkActive]="['active']">Obaveštenja</a>
+  <div class="dropdown">
+    <button class="dropbtn">Osnovne Studije</button>
+    <div class="dropdown-content">
+      <a routerLink='/rti' [routerLinkActive]="['active']">Odsek RTI</a>
+      <a routerLink='/si' [routerLinkActive]="['active']">Odsek SI</a>
+      <a routerLink='/ostali_odseci' [routerLinkActive]="['active']">Ostali odseci</a>
+    </div>
+  </div>
+  <a routerLink='/master' [routerLinkActive]="['active']">Master Studije</a>
+  <a routerLink='/projekti' [routerLinkActive]="['active']">Projekti</a>
+  <div class="dropdown">
+    <button class="dropbtn">Nauka</button>
+    <div class="dropdown-content">
+      <a routerLink='/istrazivanja' [routerLinkActive]="['active']">Istraživanja</a>
+      <a routerLink='/naucni_projekti' [routerLinkActive]="['active']">Naučni Projekti</a>
+    </div>
+  </div>
+  <a routerLink='/kontakt' [routerLinkActive]="['active']">Kontakt</a>
+  <a *ngIf="tip=='employee' || tip=='student' || tip=='admin'"  routerLink='/opcije' class="settingsBtn" [routerLinkActive]="['active']"><mat-icon inline="true">settings</mat-icon></a>
+  <a *ngIf="tip=='employee' || tip=='student' || tip=='admin'"  routerLink='' (click)='logout()' class="logoutBtn"><mat-icon inline="true">exit_to_app</mat-icon></a>
+    
+
+</div>
+<router-outlet></router-outlet>
+<app-footer></app-footer> -->
+
+<app-header></app-header>
+<div class="bar">
+  <button *ngIf="!hideMenu" class="menu" mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <a routerLink='' [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"><button mat-menu-item>{{'NavBarHome' | translate}}</button></a>
+      <a routerLink='/zaposleni' [routerLinkActive]="['active']"><button mat-menu-item>{{'NavBarStaff' | translate}}</button></a>
+      <a routerLink='/obavestenja' [routerLinkActive]="['active']"><button mat-menu-item>{{'NavBarNews' | translate}}</button></a>
+      <a routerLink='/osnovneStudije' [routerLinkActive]="['active']"><button mat-menu-item>{{'NavBarBachelorStudies' | translate}}</button></a>
+      <a routerLink='/master' [routerLinkActive]="['active']"><button mat-menu-item>{{'NavBarMasterStudies' | translate}}</button></a>
+      <a routerLink='/projekti' [routerLinkActive]="['active']"><button mat-menu-item>{{'NavBarProjects' | translate}}</button></a>
+      <a routerLink='/nauka' [routerLinkActive]="['active']"><button mat-menu-item>{{'NavBarScience' | translate}}</button></a>
+      <a routerLink='/kontakt' [routerLinkActive]="['active']"><button mat-menu-item>{{'NavBarContact' | translate}}</button></a>
+    </mat-menu>
+  <nav mat-tab-nav-bar class="navbar">
+    <a mat-tab-link routerLink='' routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive" [routerLinkActiveOptions]="{exact: true}">{{'NavBarHome' | translate}}</a>
+    <a mat-tab-link routerLink='/zaposleni' routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive" >{{'NavBarStaff' | translate}}</a>
+    <a mat-tab-link routerLink='/obavestenja' routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive" >{{'NavBarNews' | translate}}</a>
+    <a mat-tab-link routerLink='/osnovneStudije' routerLinkActive #rla4="routerLinkActive" [active]="rla4.isActive" >{{'NavBarBachelorStudies' | translate}}</a>
+    <a mat-tab-link routerLink='/master' routerLinkActive #rla5="routerLinkActive" [active]="rla5.isActive">{{'NavBarMasterStudies' | translate}}</a>
+    <a mat-tab-link routerLink='/projekti' routerLinkActive #rla6="routerLinkActive" [active]="rla6.isActive">{{'NavBarProjects' | translate}}</a>
+    <a mat-tab-link routerLink='/nauka' routerLinkActive #rla7="routerLinkActive" [active]="rla7.isActive">{{'NavBarScience' | translate}}</a>
+    <a mat-tab-link routerLink='/kontakt' routerLinkActive #rla8="routerLinkActive" [active]="rla8.isActive">{{'NavBarContact' | translate}}</a>
+  </nav>
+  <nav mat-tab-nav-bar class="navbarRight">
+    <a mat-tab-link *ngIf="tip=='employee' || tip=='student' || tip=='admin'"  routerLink='/opcije' class="settingsBtn" routerLinkActive #rla9="routerLinkActive" [active]="rla9.isActive"><mat-icon inline="true">settings</mat-icon></a>
+    <a mat-tab-link *ngIf="tip=='employee' || tip=='student' || tip=='admin'"  routerLink='' (click)='logout()' class="logoutBtn"><mat-icon inline="true">exit_to_app</mat-icon></a>
+  </nav>
+</div>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

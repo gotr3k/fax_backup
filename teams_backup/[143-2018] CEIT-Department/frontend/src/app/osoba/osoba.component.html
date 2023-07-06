@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="gore">
+        <div class="levo">
+            <img [src]="imgSrc || '../../assets/images/osoba.png'">
+        </div>
+        <div class="desno">
+            <h1>{{osoba.name}} {{osoba.surname}}</h1>
+            <h3>{{osoba.rank}}</h3>
+            <h4>Katedra za računarsku tehniku i informatiku</h4>
+            <h5>{{status(osoba)}}</h5>
+        </div>
+    </div>
+    <div class="sredina">
+        <table>
+            <tr *ngIf="osoba.username">
+                <td>
+                    <mat-icon>
+                        email
+                    </mat-icon>
+                </td>
+                <td>
+                    <a href="mailto: {{osoba.username}}">{{osoba.username}}</a>
+                </td>
+            </tr>
+            <tr  *ngIf="osoba.address">
+                <td>
+                    <mat-icon>
+                        room
+                    </mat-icon>
+                </td>
+                <td>
+                    {{osoba.address}}
+                </td>
+            </tr>
+            <tr  *ngIf="osoba.phone">
+                <td>
+                    <mat-icon>
+                        phone
+                    </mat-icon>
+                </td>
+                <td>
+                    {{osoba.phone}}
+                </td>
+            </tr>
+            <tr  *ngIf="osoba.website">
+                <td>
+                    <mat-icon>
+                        language
+                    </mat-icon>
+                </td>
+                <td>
+                    <a href="{{osoba.website}}">Websajt</a>
+                </td>
+            </tr>
+            <tr  *ngIf="osoba.room">
+                <td>
+                    <mat-icon>
+                        home
+                    </mat-icon>
+                </td>
+                <td>
+                    {{osoba.room}}
+                </td>
+            </tr>
+            <tr  *ngIf="osoba.biography">
+                <td>
+                    <mat-icon>
+                        history_edu
+                    </mat-icon>
+                </td>
+                <td>
+                    {{osoba.biography}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="dole" *ngIf="!(predmeti===undefined || predmeti.length==0)">
+        <h2>Predmeti</h2>
+        <ul>
+            <li *ngFor="let predmet of predmeti" (click)="goTo(predmet)"><a>{{predmet.code}}({{odsek(predmet)}})</a></li>
+        </ul>
+    </div>
+</div>

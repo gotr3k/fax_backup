@@ -1,0 +1,97 @@
+<div class="telo">
+    <mat-card>
+    <mat-card-title>Kreiranje naloga za zaposlene</mat-card-title>
+      <div class="polja-kolona">
+        <img class="avatar" [src]="imageSrc || '../../assets/images/osoba.png'" alt="Employee's avatar" />
+        <div class="fileUpload"> 
+          <input #fileInput type="file">
+          <button mat-button class ="btnUpload" (click)="addFile()">Upload</button>
+        </div>
+        <div *ngIf="uploadErrMsg!=''" class="poruka err">
+          {{uploadErrMsg}}
+        </div>
+        
+
+        <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Korisničko ime</mat-label>
+            <input matInput [(ngModel)]='username' autocomplete='off' (keyup)='deleteMessage()' [formControl]="usernameControl" required>
+            <mat-hint>Dozvoljena su mala slova i tačke</mat-hint>
+            <mat-error *ngIf="usernameControl.invalid">{{getUsernameErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Lozinka</mat-label>
+            <input matInput  [type]="hide ? 'password' : 'text'" [formControl]="passwordControl" (keyup)='deleteMessage()' [(ngModel)]='password' required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="passwordControl.invalid">{{getPasswordErrorMessage()}}</mat-error>
+          </mat-form-field>
+      
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+              <mat-label>Potvrdite lozinku</mat-label>
+              <input matInput  [type]="chide ? 'password' : 'text'" [formControl]="cpasswordControl" (keyup)='deleteMessage()' [(ngModel)]='cpassword' required>
+              <button mat-icon-button matSuffix (click)="chide = !chide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="chide">
+              <mat-icon>{{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="cpasswordControl.invalid">{{getCpasswordErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <div class="polja-horiz2">
+            <mat-form-field appearance="fill" style="margin-right:1%; width:49%;">
+                <mat-label>Ime</mat-label>
+                <input matInput [(ngModel)]='ime' autocomplete='off' (keyup)='deleteMessage()' [formControl]="imeControl" required>
+                <mat-error *ngIf="imeControl.invalid">{{getImeErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="margin-left:1%; width:49%;">
+                <mat-label>Prezime</mat-label>
+                <input matInput [(ngModel)]='prezime' autocomplete='off' (keyup)='deleteMessage()' [formControl]="prezimeControl" required>
+                <mat-error *ngIf="prezimeControl.invalid">{{getPrezimeErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+        <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Zvanje</mat-label>
+            <mat-select [(ngModel)]="rank" name="rank">
+              <mat-option *ngFor="let rank of ranks" [value]="rank.naziv">
+                {{rank.naziv}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Adresa</mat-label>
+            <input matInput [(ngModel)]='address' placeholder="Ulica i broj, Grad" autocomplete='off' (keyup)='deleteMessage()' [formControl]="addressControl" required>
+            <mat-error *ngIf="addressControl.invalid">{{getAddressErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Kabinet</mat-label>
+            <input matInput [(ngModel)]='room' placeholder="Zgrada, Br. kabineta" autocomplete='off' (keyup)='deleteMessage()' [formControl]="roomControl" required>
+            <mat-error *ngIf="roomControl.invalid">{{getRoomErrorMessage()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Br. Telefona</mat-label>
+            <input matInput [(ngModel)]='phone' autocomplete='off' (keyup)='deleteMessage()'>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Biografija</mat-label>
+            <textarea matInput [(ngModel)]='biography' autocomplete='off' (keyup)='deleteMessage()'>
+            </textarea>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+            <mat-label>Veb sajt</mat-label>
+            <input matInput [(ngModel)]='website' autocomplete='off' (keyup)='deleteMessage()'>
+          </mat-form-field>
+      </div>
+      <div class="dugme">
+        <button class="btnReg" mat-button type='submit' (click)='register()'>Kreiraj</button>
+      </div>
+      <div *ngIf="errorMsg!=''" class="poruka err">
+        {{errorMsg}}
+      </div>
+      <div *ngIf="successMsg!=''" class="poruka succ">
+        {{successMsg}}
+      </div>
+    </mat-card>
+    </div>

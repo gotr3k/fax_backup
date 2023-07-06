@@ -1,0 +1,71 @@
+.telo{
+    background-color:#e8eaf6;
+    width:100%;
+    margin:auto;
+    position:absolute;
+    bottom:4%;
+    top:17.6%;
+}
+.polja-kolona{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.polja-horiz1{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:row;
+}
+
+.polja-horiz2{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:row;
+}
+
+mat-card{
+    margin:auto;
+    margin-top:5%;
+    width:30%;
+}
+
+mat-icon-button{
+    border:none!important;
+}
+
+.dugme{
+    margin-top:10px;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.btnUpdate{
+    background-color: #e91e63;
+    color: #ffffff;
+}
+
+.poruka{
+    text-align:center;
+    font-size:16px;
+    font-weight:500;
+    margin-bottom:10px;
+}
+
+.err{
+    color: #f44336;
+}
+
+.succ{
+    color:#4caf50;
+}
+
+mat-card-title{
+    padding-top:10px;
+    color:#283593;
+    text-align:center;
+}

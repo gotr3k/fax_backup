@@ -1,0 +1,88 @@
+<div class="pocetna" [ngSwitch]="tip">
+    
+    <ng-template [ngSwitchCase]="'employee'">
+        <div class="leftEmployee">
+            <mat-card class="employeeCard" (click)="fromEmployeeGoToProfil()">
+                <img mat-card-image src="assets/images/zaposleniProfil.png">
+                <mat-card-footer>{{'Profile' | translate}}</mat-card-footer>
+            </mat-card>
+        </div>
+        <div class="rightEmployee">
+            <mat-card class="employeeCard" (click)="fromEmployeeGoToPredmeti()" >
+                <img mat-card-image src="assets/images/zaposleniPredmeti.jpg">
+                <mat-card-footer>{{'MySubjects' | translate}}</mat-card-footer>
+            </mat-card>
+        </div>
+    </ng-template>
+    <ng-template [ngSwitchCase]="'admin'">
+        <div class="levoAdmin">
+            <mat-card class="adminKartica" (click)="fromAdminGoToStudenti()">
+                <img mat-card-image src="assets/images/studenti1.jpg">
+                <mat-card-footer>Studenti</mat-card-footer>
+            </mat-card>
+        </div>
+        <div class="sredinaAdmin">
+            <mat-card class="adminKartica" (click)="fromAdminGoToZaposleni()">
+                <img mat-card-image src="assets/images/zaposleni1.jpg">
+                <mat-card-footer>Zaposleni</mat-card-footer>
+            </mat-card>
+        </div>
+        <div class="desnoAdmin">
+            <mat-card class="adminKartica" (click)="fromAdminGoToPredmeti()">
+                <img mat-card-image src="assets/images/predmeti.jpg">
+                <mat-card-footer>Predmeti</mat-card-footer>
+            </mat-card>
+        </div>        
+    </ng-template>
+    <ng-template [ngSwitchCase]="'student'">
+        <mat-spinner *ngIf="loading" style="margin:auto; margin-top:15%;"></mat-spinner>
+        <div *ngIf="!loading" class="container">
+            <div class="gore">
+                <h1>Moji predmeti</h1>
+            </div>
+            <table mat-table [dataSource]="dataSourceStudent" matSort class="mat-elevation-z8">
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>Šifra</th>
+                    <td matt-cell *matCellDef="let subject" style="width:10%; padding-left:25px;" (click)="fromStudentGoToSubject(subject)">{{subject.code}}</td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef style="width:30%;" mat-sort-header>Naziv</th>
+                    <td matt-cell *matCellDef="let subject" style="width:30%;" (click)="fromStudentGoToSubject(subject)">{{subject.name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef style="width:15%;" mat-sort-header>Tip</th>
+                    <td matt-cell *matCellDef="let subject" style="width:15%;" (click)="fromStudentGoToSubject(subject)">{{tipPredmeta(subject)}}</td>
+                </ng-container>
+                <ng-container matColumnDef="espb">
+                    <th mat-header-cell *matHeaderCellDef style="width:10%;" mat-sort-header>ESPB</th>
+                    <td matt-cell *matCellDef="let subject" style="width:10%;" (click)="fromStudentGoToSubject(subject)">{{subject.espb}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let subjects; columns:columns"></tr>
+            </table>
+        </div>
+    </ng-template>
+    <ng-template [ngSwitchDefault]>
+        <div class="levo">
+            <mat-card>
+                <ng-template [ngIf]="pokaziLogin==true">
+                    <mat-card-title>Prijava</mat-card-title>
+                    <app-login></app-login>
+                    <div  class="text">
+                        Nemate nalog? Registrujte se <a (click)="promeni()">ovde</a>
+                    </div>
+                </ng-template>
+                <ng-template [ngIf]="pokaziLogin==false">
+                    <mat-card-title>Registracija</mat-card-title>
+                    <app-register></app-register>
+                    <div  class="text">
+                        Već imate nalog? Ulogujte se <a (click)="promeni()">ovde</a>
+                    </div>
+                </ng-template>
+            </mat-card>
+        </div>
+        <div class="desno">
+            <app-album></app-album>
+        </div>
+    </ng-template>
+</div>

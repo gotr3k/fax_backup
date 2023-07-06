@@ -1,0 +1,41 @@
+<div class="nav">
+    <mat-sidenav-container>
+    <mat-sidenav mode="side" role="navigation" opened="true" disableClose="true">
+        <button class="btnBack" mat-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+        <ul>     
+            <li><a (click)="goToOb()" >Obaveštenja</a></li>
+            <li><a (click)="goToO()">O predmetu</a></li>        
+            <li><a (click)="goToP()">Predavanja</a></li>
+            <li><a (click)="goToV()">Vežbe</a></li>
+            <li class="active" *ngIf="subject.labVisible" ><a (click)="goToL()" >Laboratorija</a></li>
+            <li *ngIf="subject.projectVisible"><a (click)="goToD()" >Projekat</a></li>
+            <li *ngIf="subject.examVisible"><a (click)="goToI()">Ispitna pitanja</a></li>
+            <li><a (click)="goToS()">Spiskovi</a></li>
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <h1>Laboratorija</h1>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 poslednja">
+            <ng-container matColumnDef="fileName">
+                <th mat-header-cell *matHeaderCellDef style="width:56%;" mat-sort-header>Fajl</th>
+                <td matt-cell *matCellDef="let file" style="width:56%; padding-left:25px;"><a (click)="download(file)">{{file.fileName}}</a></td>
+            </ng-container>
+            <ng-container matColumnDef="employeeFullName">
+                <th mat-header-cell *matHeaderCellDef style="width:20%;" mat-sort-header>Postavio</th>
+                <td matt-cell *matCellDef="let file" style="width:20%;">{{file.employeeFullName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="fileSize">
+                <th mat-header-cell *matHeaderCellDef style="width:9%;" mat-sort-header>Veličina</th>
+                <td matt-cell *matCellDef="let file" style="width:9%;">{{velicina(file.fileSize,2)}}</td>
+            </ng-container>
+            <ng-container matColumnDef="uploadDate">
+                <th mat-header-cell *matHeaderCellDef style="width:9%;" mat-sort-header>Datum</th>
+                <td matt-cell *matCellDef="let file" style="width:9%;">{{file.uploadDate}}</td>
+            </ng-container>   
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let files; columns:columns"></tr>
+        </table>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+    

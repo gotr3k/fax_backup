@@ -1,0 +1,79 @@
+INFO  22:18:26,339 - Compiling source file: D:\NiK\Faks2\PP1\pp1lab.templateAST\workspace\MJCompiler\test\program.mj
+INFO  22:18:26,371 - #2 program
+INFO  22:18:26,371 - #42 MJProgram
+INFO  22:18:26,371 - #42 int
+INFO  22:18:26,373 - #42 x
+INFO  22:18:26,373 - #19 ;
+INFO  22:18:26,374 - #42 int
+INFO  22:18:26,374 - #42 y
+INFO  22:18:26,375 - #19 ;
+INFO  22:18:26,375 - #17 {
+INFO  22:18:26,375 - #42 int
+INFO  22:18:26,375 - #42 k
+INFO  22:18:26,375 - #20 (
+INFO  22:18:26,376 - #21 )
+INFO  22:18:26,377 - #42 int
+INFO  22:18:26,377 - #42 c
+INFO  22:18:26,377 - #19 ;
+INFO  22:18:26,378 - #17 {
+INFO  22:18:26,379 - #42 c
+INFO  22:18:26,379 - #38 =
+INFO  22:18:26,380 - #41 1
+INFO  22:18:26,380 - #19 ;
+INFO  22:18:26,381 - #12 return
+INFO  22:18:26,381 - #42 c
+INFO  22:18:26,382 - #24 +
+INFO  22:18:26,382 - #41 2
+INFO  22:18:26,382 - #19 ;
+INFO  22:18:26,383 - #18 }
+INFO  22:18:26,383 - #42 int
+INFO  22:18:26,383 - #42 main
+INFO  22:18:26,384 - #20 (
+INFO  22:18:26,384 - #21 )
+INFO  22:18:26,384 - #42 char
+INFO  22:18:26,384 - #42 n
+INFO  22:18:26,384 - #37 ,
+INFO  22:18:26,384 - #42 m
+INFO  22:18:26,384 - #37 ,
+INFO  22:18:26,384 - #42 o
+INFO  22:18:26,385 - #19 ;
+INFO  22:18:26,385 - #17 {
+INFO  22:18:26,385 - #42 y
+INFO  22:18:26,385 - #38 =
+INFO  22:18:26,385 - #41 2
+INFO  22:18:26,385 - #19 ;
+INFO  22:18:26,385 - #42 x
+INFO  22:18:26,385 - #38 =
+INFO  22:18:26,385 - #42 y
+INFO  22:18:26,386 - #24 +
+INFO  22:18:26,386 - #41 2
+INFO  22:18:26,386 - #19 ;
+INFO  22:18:26,386 - #42 y
+INFO  22:18:26,386 - #38 =
+INFO  22:18:26,386 - #42 k
+INFO  22:18:26,386 - #20 (
+INFO  22:18:26,387 - #21 )
+INFO  22:18:26,387 - #24 +
+INFO  22:18:26,388 - #41 3
+INFO  22:18:26,388 - #19 ;
+INFO  22:18:26,388 - #10 print
+INFO  22:18:26,388 - #20 (
+INFO  22:18:26,388 - #42 y
+INFO  22:18:26,388 - #21 )
+INFO  22:18:26,388 - #19 ;
+INFO  22:18:26,389 - #12 return
+INFO  22:18:26,389 - #41 0
+INFO  22:18:26,389 - #19 ;
+INFO  22:18:26,389 - #18 }
+INFO  22:18:26,389 - #18 }
+INFO  22:18:26,396 - Deklarisana promenljiva x na liniji 2
+INFO  22:18:26,396 - Deklarisana promenljiva y na liniji 2
+INFO  22:18:26,396 - Obradjuje se funkcija k na liniji 5
+INFO  22:18:26,396 - Deklarisana promenljiva c na liniji 5
+ERROR 22:18:26,396 - Greska na liniji 7 : tip izraza u return naredbi ne slaze se sa tipom povratne vrednosti funkcije k
+INFO  22:18:26,396 - Obradjuje se funkcija main na liniji 10
+INFO  22:18:26,396 - Deklarisana promenljiva n na liniji 11
+INFO  22:18:26,397 - Deklarisana promenljiva m na liniji 11
+INFO  22:18:26,397 - Deklarisana promenljiva o na liniji 11
+ERROR 22:18:26,397 - Greska na liniji 17 : tip izraza u return naredbi ne slaze se sa tipom povratne vrednosti funkcije main
+ERROR 22:18:26,398 - Parsiranje NIJE uspesno zavrseno!

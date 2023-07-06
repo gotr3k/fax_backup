@@ -1,0 +1,468 @@
+1000, 00 //trazena vrednost
+1001, 0A
+//niz kovanica
+1100, 00 //kovanica: 1
+1101, 01
+1102, 00 //kovanica: 2
+1103, 02
+1104, 00 //kovanica: 5
+1105, 05
+1106, 00 //kovanica: 7
+1107, 07
+//rezultujuci niz
+2100, 00 //kovanica: 1
+2101, 00
+2102, 00 //kovanica: 2
+2103, 00
+2104, 00 //kovanica: 5
+2105, 00
+2106, 00 //kovanica: 7
+2107, 00
+//pokazivaci, brojaci...
+2200, 00 //broj razlicitih kovanica
+2201, 00
+2202, 11 //pokazivac adresa kovanica
+2203, 00
+3000, 00 //pocetak pomocnog niza
+3001, 00
+2204, 00 //brojac 1
+2205, 00
+//program
+100, C0 //LOAD (2202), petlja, brojimo novcice
+101, 40
+102, 22
+103, 02
+104, 08 //BZ 1B , kad dodje do kraja niza, skok
+105, 1B
+106, C0 //LOAD 2202
+107, 00
+108, 22
+109, 02
+10A, C4 //ADD #0002
+10B, C0
+10C, 00
+10D, 02
+10E, C1 //STORE 2202
+10F, 00 
+110, 22
+111, 02
+112, C0 //LOAD 2200
+113, 00
+114, 22
+115, 00
+116, C4 //ADD #0001
+117, C0
+118, 00
+119, 01
+11A, C1 //STORE 2200
+11B, 00 
+11C, 22 
+11D, 00
+11E, 40 //JMP 100 
+11F, 01
+120, 00
+121, C0 //LD #3000 (upisivanje pocetne adrese pomocnog niza kao sp)
+122, C0 
+123, 30
+124, 00
+125, 8D //STSP
+126, C0 //LOAD 2204 (inicijalizacija prvog reda)
+127, 00
+128, 22
+129, 04
+12A, FE //PUSH
+12B, C4 //ADD #0001
+12C, C0
+12D, 00
+12E, 01
+12F, C1 //STORE 2204
+130, 00
+131, 22
+132, 04
+133, C5 //SUB 1000
+134, 00
+135, 10
+136, 00
+137, 08 //BZ 03
+138, 03
+139, 40 //JMP 126 , vrtimo se u petlji dok ne upisemo vrednosti 0 - traz. vr.
+13A, 01
+13B, 26
+13C, C0 //LOAD 1000 , na kraju upisujemo i trazenu vrednost u niz 
+13D, 00
+13E, 10
+13F, 00
+140, FE //PUSH 
+141, C0 //LOAD #1102 , formiranje tabele, postavljamo pokazivac na novcice
+142, C0
+143, 11
+144, 02
+145, C1 //STORE 2202 , postavljanje pokazivaca
+146, 00
+147, 22
+148, 02
+
+149, C0 //LOAD (2202), pocetak spoljasnje petlje, provera
+14A, 40
+14B, 22
+14C, 02
+14D, 08 //BZ 33 , kad dodje do kraja niza, izlazimo iz spoljasnje, preskacemo sve
+14E, 33
+
+14F, C0 //LOAD #0000 , postavljanje brojaca unutrasnje
+150, C0
+151, 00
+152, 00
+153, C1 //STORE 2204 , brojac unutrasnje petlje na 0
+154, 00
+155, 22
+156, 04
+
+157, 40 //JMP 185 , skok na deo koji se radi u okvoru un. petlje (potprogram)
+158, 01
+159, 85
+15A, C0 //LOAD 2204 , azuriranje brojaca unutrasnje petlje
+15B, 00
+15C, 22
+15D, 04
+15E, C4 //ADD #0001 , uvecavamo brojac za 1
+15F, C0
+160, 00
+161, 01
+162, C1 //STORE 2204
+163, 00
+164, 22
+165, 04
+166, C5 //SUB 1000
+167, 00
+168, 10
+169, 00
+16A, C5 //SUB #0001
+16B, C0
+16C, 00
+16D, 01
+16E, 08 //BGRTEU 03 , kada dodje do trazenog broja izlazi iz unutrasnje petlje
+16F, 03
+170, 40 //JMP 157 , skok na pocetak unutrasnje petlje
+171, 01 
+172, 57
+
+173, C0 //LOAD 2202 , azuriranje spoljasnje petlje
+174, 00
+175, 22
+176, 02
+177, C4 //ADD #0002
+178, C0
+179, 00
+17A, 02
+17B, C1 //STORE 2202
+17C, 00 
+17D, 22
+17E, 02
+17F, 40 //JMP 149 , skok na pocetak spoljasnje petlje
+180, 01
+181, 49
+182, 40 //JMP .. , posle kraja obe petlje, skok na dalju obradu
+183, 01
+184, DF
+
+//pocetak potprograma unutrasnje petlje
+
+185, C0 //LOAD 2204 , trenutna kovanica za koju se posmatra red 
+186, 00
+187, 22
+188, 04
+189, C5 //SUB (2202) , oduzimamo spoljni od unutrasnjeg brojaca
+18A, 40
+18B, 22
+18C, 02
+18D, 0A //BNEG 3E , treba da skoci na drugi deo ! ! !
+18E, 3E
+
+18F, FC //LDSP , prvi deo, stvaranje nove vrednosti
+190, C4 //ADD (2202) , oduzimamo apoen kovanice tj spoljasnji pok.
+191, 40 
+192, 22
+193, 02  
+194, C4 //ADD (2202) , jos jednom jer je potr. dve mem. lok.
+195, 40 
+196, 22
+197, 02  
+198, C5 //SUB #0001 , pozicioniranje
+199, C0
+19A, 00
+19B, 01
+19C, FB //LDA
+19D, C4 //ADD #0001 , dodajemo 1 po formuli
+19E, C0
+19F, 00
+1A0, 01
+1A1, C1 //STORE 2206, pomocna lokacija broj 1
+1A2, 00
+1A3, 22
+1A4, 06
+1A5, FC //LDSP , ucitavamo vrednost u redu iznad da bi uporedili
+1A6, C4 //ADD 1000 , da bi znali sta prepisujemo pozic. adresu u odnosu na sp
+1A7, 00
+1A8, 10
+1A9, 00
+1AA, C4 //ADD 1000 oduzimamo dva puta jer dve mem lok zauzima podatak
+1AB, 00
+1AC, 10
+1AD, 00
+1AE, C4 //ADD #0001 oduzimamo jos sa 1 jer sp pok. na prvu slob. lok.
+1AF, C0
+1B0, 00
+1B1, 01
+1B2, FB //LDA , citamo vr. iz prethodnog reda
+1B3, C1 //STORE 2208, pomocna lokacija broj 2
+1B4, 00
+1B5, 22
+1B6, 08
+1B7, C5 //SUB 2206 , oduzimamo od druge vr. da bi smo nasli minimum 
+1B8, 00
+1B9, 22
+1BA, 06
+1BB, 0A //BNEG 08 , ukoliko je prva vrednost manja
+1BC, 08
+1BD, C0 //LOAD 2206, druga vrednost
+1BE, 00
+1BF, 22
+1C0, 06
+1C1, FE //PUSH
+1C2, 40 //JMP 15A
+1C3, 01
+1C4, 5A
+1C5, C0 //LOAD 2208, prva vrednost
+1C6, 00
+1C7, 22
+1C8, 08
+1C9, FE //PUSH
+1CA, 40 //JMP 15A
+1CB, 01
+1CC, 5A
+
+1CD, FC //LDSP , drugi deo, prepisivanje podataka iz prethodnog reda
+1CE, C4 //ADD 1000 , da bi znali sta prepisujemo pozic. adresu u odnosu na sp
+1CF, 00
+1D0, 10
+1D1, 00
+1D2, C4 //ADD 1000 oduzimamo dva puta jer dve mem lok zauzima podatak
+1D3, 00
+1D4, 10
+1D5, 00
+1D6, C4 //ADD #0001 oduzimamo jos sa 1 jer sp pok. na prvu slob. lok.
+1D7, C0
+1D8, 00
+1D9, 01
+1DA, FB //LDA , citamo vr. iz prethodnog reda
+1DB, FE //PUSH
+1DC, 40 //JMP 15A, vracamo se iz potprograma
+1DD, 01
+1DE, 5A
+
+//drugi deo programa
+
+1DF, C0 //LOAD 2202
+1E0, 00
+1E1, 22
+1E2, 02
+1E3, C4 //ADD #1000
+1E4, C0
+1E5, 10
+1E6, 00
+1E7, C1 //STORE 220A
+1E8, 00
+1E9, 22
+1EA, 0A
+1EB, C0 //LOAD 1000 , trazena vrednost
+1EC, 00
+1ED, 10
+1EE, 00
+1EF, C1 //STORE 220C , POMVR
+1F0, 00
+1F1, 22
+1F2, 0C
+1F3, C1 //STORE 2210 , SIRINA
+1F4, 00
+1F5, 22
+1F6, 10
+1F7, FC //LDSP
+1F8, C4 //ADD #0001
+1F9, C0
+1FA, 00
+1FB, 01
+1FC, C1 //STORE 220E , POKAZIVAC
+1FD, 00
+1FE, 22
+1FF, 0E
+200, C1 //STORE 2212 , POKVRH
+201, 00
+202, 22
+203, 12
+204, C0 //LOAD 220E , POKAZIVAC , OVDE SE VRACAMO
+205, 00
+206, 22
+207, 0E
+208, C4 //ADD 1000
+209, 00
+20A, 10
+20B, 00
+20C, C4 //ADD 1000
+20D, 00
+20E, 10
+20F, 00
+210, C4 //ADD #0002
+211, C0
+212, 00
+213, 02
+214, C1 //STORE 220E , POKAZIVAC
+215, 00
+216, 22
+217, 0E
+218, C0 //LOAD 2202
+219, 00
+21A, 22
+21B, 02
+21C, C5 //SUB #0002
+21D, C0
+21E, 00
+21F, 02
+220, C1 //STORE 2202
+221, 00
+222, 22
+223, 02
+224, C0 //LOAD 220A
+225, 00
+226, 22
+227, 0A
+228, C5 //SUB #0002
+229, C0
+22A, 00
+22B, 02
+22C, C1 //STORE 220A
+22D, 00
+22E, 22
+22F, 0A
+230, C0 //LOAD (220E) , POKAZIVAC
+231, 40
+232, 22
+233, 0E
+234, C5 //SUB (2212) , POKVRH
+235, 40
+236, 22
+237, 12
+238, 09 //BNZ 03
+239, 03
+23A, 40 //JMP 204 , vracamo se pocetak petlje
+23B, 02
+23C, 04
+
+23D, C0 //LOAD (220A) , azuriranje kovanica
+23E, 40
+23F, 22
+240, 0A
+241, C4 //ADD #0001
+242, C0
+243, 00
+244, 01
+245, C1 //STORE (220A)
+246, 40
+247, 22
+248, 0A
+249, C0 //LOAD 220C , POMVR
+24A, 00
+24B, 22
+24C, 0C
+24D, C5 //SUB (2202) , POMVR - KOIN
+24E, 40
+24F, 22
+250, 02
+251, C1 //STORE 220C , POMVR
+252, 00
+253, 22
+254, 0C
+255, C0 //LOAD 220E , POKAZIVAC
+256, 00
+257, 22
+258, 0E
+259, C5 //SUB 1000 , TRAZENA VREDNOST
+25A, 00
+25B, 10
+25C, 00
+25D, C5 //SUB 1000 , TRAZENA VREDNOST
+25E, 00
+25F, 10
+260, 00
+261, C5 //SUB 220C , POMVR
+262, 00
+263, 22
+264, 0C
+265, C5 //SUB 220C ,  POMVR
+266, 00
+267, 22
+268, 0C
+269, C4 //ADD 2210 , SIRINA 
+26A, 00
+26B, 22
+26C, 10
+26D, C4 //ADD 2210, SIRINA
+26E, 00
+26F, 22
+270, 10
+271, C5 //SUB #0002 , POZICIONIRANJE
+272, C0
+273, 00
+274, 02
+275, C1 //STORE 220E , POKAZIVAC
+276, 00
+277, 22
+278, 0E
+279, C1 //STORE 2212 , POKVRH
+27A, 00
+27B, 22
+27C, 12
+27D, C0 //LOAD 220C , POMVR
+27E, 00
+27F, 22
+280, 0C
+281, C1 //STORE 2210 , SIRINA
+282, 00
+283, 22
+284, 10
+285, C0 //LOAD 2202 , KOIN
+286, 00
+287, 22
+288, 02
+289, C4 //ADD #0002 , SLEDECA KOVANICA
+28A, C0
+28B, 00
+28C, 02
+28D, C1 //STORE 2202 , KOIN
+28E, 00
+28F, 22
+290, 02
+291, C0 //LOAD 220A , NKOIN
+292, 00
+293, 22
+294, 0A
+295, C4 //ADD #0002
+296, C0
+297, 00
+298, 02
+299, C1 //STORE 220A
+29A, 00
+29B, 22
+29C, 0A
+29D, C0 //LOAD 220C , POMVR
+29E, 00
+29F, 22
+2A0, 0C
+2A1, 08 //BZ 03 , DA LI SMO STIGLI DO NULE
+2A2, 03
+2A3, 40 //JMP 204
+2A4, 02
+2A5, 04
+2A6, FF //HALT
+2A7, 
+2A8, 

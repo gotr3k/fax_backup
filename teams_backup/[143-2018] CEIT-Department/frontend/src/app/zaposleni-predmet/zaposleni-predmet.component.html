@@ -1,0 +1,18 @@
+<div class="nav">
+<mat-sidenav-container>
+<mat-sidenav mode="side" role="navigation" opened="true" disableClose="true">
+    <button class="btnBack" mat-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+    <ul>     
+        <li><a (click)="goToO()">O predmetu</a></li>
+            <li><a (click)="goToOb()">Obaveštenja</a></li>
+            <li><a (click)="goToP()">Predavanja</a></li>
+            <li><a (click)="goToV()">Vežbe</a></li>
+            <li><a (click)="goToL()">Laboratorija</a></li>
+            <li><a (click)="goToD()">Projekat</a></li>
+            <li><a (click)="goToI()"  >Ispitna pitanja</a></li>
+            <li><a (click)="goToS()">Spiskovi</a></li>    
+    </ul>
+</mat-sidenav>
+<mat-sidenav-content></mat-sidenav-content>
+</mat-sidenav-container>
+</div>

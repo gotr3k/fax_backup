@@ -1,0 +1,49 @@
+<div class="nav">
+    <mat-sidenav-container>
+    <mat-sidenav mode="side" role="navigation" opened="true" disableClose="true">
+        <button class="btnBack" mat-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+        <ul>     
+            <li><a (click)="goToOb()">Obaveštenja</a></li>
+            <li><a (click)="goToO()">O predmetu</a></li>        
+            <li><a (click)="goToP()">Predavanja</a></li>
+            <li><a (click)="goToV()">Vežbe</a></li>
+            <li *ngIf="subject.labVisible"><a (click)="goToL()" >Laboratorija</a></li>
+            <li *ngIf="subject.projectVisible" ><a (click)="goToD()" >Projekat</a></li>
+            <li *ngIf="subject.examVisible"><a (click)="goToI()">Ispitna pitanja</a></li>
+            <li><a (click)="goToS()" class="active">Spiskovi</a></li>
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="gore">
+            <h1>Spiskovi</h1>      
+        </div>
+        <div class="sredina">
+            <mat-accordion multi="true">
+                <mat-expansion-panel *ngFor="let spisak of spiskovi">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="pom">
+                        {{spisak.spisak.date}}&nbsp;{{spisak.spisak.time}}
+                        <div class="mesto">{{spisak.spisak.place}}</div>
+                        </div>
+                        <div class="naslov">{{spisak.spisak.name}} <span *ngIf="spisak.spisak.slots!=null">(slobodnih mesta: {{spisak.spisak.slots}})</span></div>                    
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="buttons">
+                        <button class="btnEnroll" title="Upiši se" *ngIf="type=='student' && !spisak.enrolled && spisak.spisak.open && (spisak.spisak.slots==null || spisak.spisak.slots>0)" (click)="enrollOnList(spisak)"><mat-icon>login</mat-icon></button>
+                        <button class="btnDropOut" title="Ispiši se" *ngIf="type=='student' && spisak.enrolled && spisak.spisak.open" (click)="enrollOnList(spisak)"><mat-icon>logout</mat-icon></button>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="spisak">
+                    <ul>
+                        <li *ngFor="let student of spisak.students">{{student.index}} {{student.name}} {{student.surname}}</li>
+                    </ul>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+        </div>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+    

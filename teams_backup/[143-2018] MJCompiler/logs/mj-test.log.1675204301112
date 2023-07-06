@@ -1,0 +1,65 @@
+INFO  23:27:46,453 - Compiling source file: D:\NiK\Faks2\PP1\pp1lab.templateAST\workspace\MJCompiler\test\program.mj
+INFO  23:27:46,491 - #2 program
+INFO  23:27:46,492 - #42 MJProgram
+INFO  23:27:46,493 - #42 int
+INFO  23:27:46,494 - #42 x
+INFO  23:27:46,494 - #19 ;
+INFO  23:27:46,495 - #42 int
+INFO  23:27:46,495 - #42 y
+INFO  23:27:46,496 - #19 ;
+INFO  23:27:46,496 - #17 {
+INFO  23:27:46,496 - #42 int
+INFO  23:27:46,496 - #42 k
+INFO  23:27:46,496 - #20 (
+INFO  23:27:46,497 - #21 )
+INFO  23:27:46,498 - #42 int
+INFO  23:27:46,498 - #42 c
+INFO  23:27:46,506 - #19 ;
+INFO  23:27:46,506 - #17 {
+INFO  23:27:46,510 - #42 c
+INFO  23:27:46,512 - #38 =
+INFO  23:27:46,513 - #41 1
+INFO  23:27:46,514 - #19 ;
+INFO  23:27:46,515 - #12 return
+INFO  23:27:46,517 - #42 c
+INFO  23:27:46,518 - #24 +
+INFO  23:27:46,520 - #41 2
+INFO  23:27:46,522 - #19 ;
+INFO  23:27:46,522 - #18 }
+INFO  23:27:46,523 - #42 int
+INFO  23:27:46,524 - #42 main
+INFO  23:27:46,524 - #20 (
+INFO  23:27:46,524 - #21 )
+INFO  23:27:46,524 - #17 {
+INFO  23:27:46,525 - #42 y
+INFO  23:27:46,525 - #38 =
+INFO  23:27:46,525 - #41 2
+INFO  23:27:46,525 - #19 ;
+INFO  23:27:46,525 - #42 x
+INFO  23:27:46,526 - #38 =
+INFO  23:27:46,526 - #42 y
+INFO  23:27:46,526 - #24 +
+INFO  23:27:46,528 - #41 2
+INFO  23:27:46,528 - #19 ;
+INFO  23:27:46,529 - #42 y
+INFO  23:27:46,529 - #38 =
+INFO  23:27:46,530 - #42 k
+INFO  23:27:46,530 - #20 (
+INFO  23:27:46,530 - #21 )
+INFO  23:27:46,531 - #24 +
+INFO  23:27:46,531 - #41 3
+INFO  23:27:46,532 - #19 ;
+INFO  23:27:46,532 - #10 print
+INFO  23:27:46,532 - #20 (
+INFO  23:27:46,533 - #42 y
+INFO  23:27:46,533 - #21 )
+INFO  23:27:46,533 - #19 ;
+INFO  23:27:46,533 - #12 return
+INFO  23:27:46,533 - #41 0
+INFO  23:27:46,534 - #19 ;
+INFO  23:27:46,534 - #18 }
+INFO  23:27:46,534 - #18 }
+INFO  23:27:46,542 - Deklarisana promenljiva x na liniji 2
+INFO  23:27:46,543 - Deklarisana promenljiva y na liniji 2
+INFO  23:27:46,543 - Obradjuje se funkcija k na liniji 5
+INFO  23:27:46,545 - Deklarisana promenljiva c na liniji 5

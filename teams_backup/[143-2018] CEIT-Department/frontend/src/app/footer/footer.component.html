@@ -1,0 +1,14 @@
+<mat-toolbar class="footer" color="primary">
+    <span class="left">
+        <div class="dropdown">
+            <button class="btn-language">{{language1}}</button>
+            <div class="dropdown-content">
+                <a (click)="changeLanguageTo2()">{{language2}}</a>
+                <a (click)="changeLanguageTo3()">{{language3}}</a>
+            </div>
+      </div>
+    </span>
+    <span class="middle"><a title="{{'FooterProjectNameHover' | translate}}" href="https://rti.etf.bg.ac.rs/rti/ir4pia/materijali/projekat/2020_21_Projekat_januarsko_februarski.pdf">&copy;{{'FooterProjectName' | translate}}</a></span>  
+    <span class="right">&copy;{{'FooterAuthor' | translate}}</span>
+</mat-toolbar>
+

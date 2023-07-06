@@ -1,0 +1,240 @@
+package application;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.Vector;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
+public class RequestListener extends Thread{
+	private static InetAddress serverIPAddress;
+	private static int serverSocketPort;
+	private static ServerSocket serverSocket;
+	private static Socket socket;
+	private static AtomicBoolean serverIsRunning=new AtomicBoolean(false);
+	private static ObjectOutputStream oos;
+	private static ObjectInputStream ois;
+	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
+	@FXML
+	private static TextField ClientRefreshRateTextField;
+	
+	@FXML
+	private static TextField SubserverRefreshRateTextField;
+
+	@FXML
+	private static TextField ServerIPAddressTextField;
+
+	@FXML
+	private static TextField ServerSocketPortTextField;
+
+	@FXML
+	private static TextArea SubserversTextArea;
+	
+	@FXML
+	private static TextArea ServerLogsTextArea;
+	
+	@FXML
+	private static TextArea StocksTextArea;
+	@FXML
+	private static TextArea ClientsTextArea;
+	
+	@FXML
+	private static Button StartServerButton;
+	
+	@FXML
+	private static Button StopServerButton;
+	
+	public static LinkedBlockingQueue<Vector<String>> requestQueue = new LinkedBlockingQueue<Vector<String>>();	//blocking queue for connection requests that come from clients and subservers (ipa, port, type, operation, username/stockname, password/amount)	
+	public static LinkedBlockingQueue<Vector<String>> stocksQueue=new LinkedBlockingQueue<Vector<String>>();		//queue in which stocks are stored (name, price, subserver ipa, subserver port)
+	public static LinkedBlockingQueue<Vector<String>> clientQueue=new LinkedBlockingQueue<Vector<String>>();		//queue in which clients are stored (ipa, port, user, pass)
+	public static LinkedBlockingQueue<Vector<String>> subserverQueue=new LinkedBlockingQueue<Vector<String>>(); 	//queue in which subservers are stored (ipa, port)
+	
+	RequestListener(String ipa, int port, TextField ClientRR, TextField SubserverRR, TextField ServerIPA, TextField ServerPort, TextArea Subservers, TextArea Clients, TextArea ServerLogs, TextArea Stocks, Button Start, Button Stop) {
+		try {
+			serverIPAddress=InetAddress.getByName(ipa);
+		} catch (UnknownHostException e) {
+			ServerLogs.appendText("["+dateFormat.format(new Date())+"] Cannot convert IP address to InetAddress Object!\n"
+					+"Error: "+e.toString()+"\n\n");
+		}
+        serverSocketPort = port;
+        ClientRefreshRateTextField=ClientRR;
+        SubserverRefreshRateTextField=SubserverRR;
+        ServerIPAddressTextField=ServerIPA;
+        ServerSocketPortTextField=ServerPort;
+        SubserversTextArea = Subservers;
+        ServerLogsTextArea = ServerLogs;
+        ClientsTextArea = Clients;
+        StartServerButton=Start;
+        StopServerButton=Stop;
+        StocksTextArea=Stocks;
+        
+        //stocksQueue.clear();
+        
+        //probaj da pomeris u servant, tek kad se joinuje prvi subserver da se ovo napravi
+        //random stocks generator [acronym, company name, current price, change in percentages]
+        Vector<String> temp=new Vector<String>();
+        temp.add("TSLA");
+        temp.add("Tesla");
+        temp.add(String.valueOf(Math.round((Math.random()*20+730)*100.0)/100.0)+"$");	//[730-750]
+        temp.add("+0.00%");
+        if(stocksQueue.offer(temp)) {
+        	StocksTextArea.appendText(temp+"\n");
+        	temp.clear();
+        }
+        stocksQueue.forEach(stock->{
+        	StocksTextArea.appendText(stock.toString()+"\n");
+        });
+        
+        
+        temp.add("AAPL");
+        temp.add("Apple");
+        temp.add(String.valueOf(Math.round((Math.random()*20+140)*100.0)/100.0)+"$");	//[140-160]
+        temp.add("+0.00%");
+        if(stocksQueue.offer(temp))
+        	StocksTextArea.appendText(temp+"\n");
+        stocksQueue.forEach(stock->{
+        	StocksTextArea.appendText(stock.toString()+"\n");
+        });
+        temp.clear();
+        
+        temp.add("AMZN");
+        temp.add("Amazon.com");
+        temp.add(String.valueOf(Math.round((Math.random()*20+3450)*100.0)/100.0)+"$");	//[3450-3470]
+        temp.add("+0.00%");
+        if(stocksQueue.offer(temp))
+        	StocksTextArea.appendText(temp+"\n");
+        
+        temp.clear();
+        stocksQueue.forEach(stock->{
+        	StocksTextArea.appendText(stock.toString()+"\n");
+        });
+        
+        
+        temp.add("MRNA");
+        temp.add("Moderna");
+        temp.add(String.valueOf(Math.round((Math.random()*20+420)*100.0)/100.0)+"$");	//[420-440]
+        temp.add("+0.00%");
+        if(stocksQueue.offer(temp))
+        	StocksTextArea.appendText(temp+"\n");
+        temp.clear();
+        
+        temp.add("MSFT");
+        temp.add("Apple");
+        temp.add(String.valueOf(Math.round((Math.random()*20+290)*100.0)/100.0)+"$");	//[290-310]
+        temp.add("+0.00%");
+        if(stocksQueue.offer(temp))
+        	StocksTextArea.appendText(temp+"\n");
+        temp.clear();
+    }
+	
+	private static void setUI() {
+		StopServerButton.setFocusTraversable(serverIsRunning.get());
+		StopServerButton.setVisible(serverIsRunning.get());
+		StartServerButton.setFocusTraversable(!serverIsRunning.get());
+		StartServerButton.setVisible(!serverIsRunning.get());
+		ClientRefreshRateTextField.setFocusTraversable(!serverIsRunning.get());
+		ClientRefreshRateTextField.setEditable(!serverIsRunning.get());
+		SubserverRefreshRateTextField.setFocusTraversable(!serverIsRunning.get());
+		SubserverRefreshRateTextField.setEditable(!serverIsRunning.get());
+		ServerIPAddressTextField.setFocusTraversable(!serverIsRunning.get());
+		ServerIPAddressTextField.setEditable(!serverIsRunning.get());
+		ServerSocketPortTextField.setFocusTraversable(!serverIsRunning.get());
+		ServerSocketPortTextField.setEditable(!serverIsRunning.get());
+	}
+	
+	@Override
+	public void run() {
+		
+	}
+	
+	public void listenToRequests() {
+		Runnable r=()->{
+			serverIsRunning.set(true);
+			try {
+				serverSocket=new ServerSocket(serverSocketPort, 1, serverIPAddress);
+				Platform.runLater(()->{
+				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Created server socket on "
+						+serverSocket.getInetAddress().toString().substring(1, serverSocket.getInetAddress().toString().length())
+						+"/"+serverSocket.getLocalPort()+"\n\n");
+				ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] SERVER IS ONLINE\n\n");
+				setUI();
+				});
+			} catch (IOException e) {
+				serverIsRunning.set(false);
+				clientQueue.clear();
+				subserverQueue.clear();
+				Platform.runLater(()->{
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot create server socket!\n"
+							+"Error: "+e.toString()+"\n\n");
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] SERVER IS OFFLINE\n\n");
+					ClientsTextArea.clear();
+					SubserversTextArea.clear();
+					setUI();
+				});
+			}
+			
+			while(serverIsRunning.get()) {
+				try {
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Listening for requests...\n\n");
+					socket=serverSocket.accept();
+					RequestServant reqServant=new RequestServant(Double.parseDouble(ClientRefreshRateTextField.getText()), Double.parseDouble(SubserverRefreshRateTextField.getText()), socket, requestQueue, clientQueue, subserverQueue, stocksQueue, SubserversTextArea, ServerLogsTextArea, ClientsTextArea, StocksTextArea);
+					reqServant.start();
+				} catch (IOException e) {
+					if(serverIsRunning.get())
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot establish any connections!\n"
+							+"Error: "+e.toString()+"\n\n");
+				}
+			}
+		};
+		
+		Thread t=new Thread(r);
+		t.start();
+	}
+	
+	public void stopListeningToRequests() {
+		Runnable r=()->{
+			serverIsRunning.set(false);
+			try {
+				serverSocket.close();				
+				Platform.runLater(()->{
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Closed server socket on "
+							+serverSocket.getInetAddress().toString().substring(1, serverSocket.getInetAddress().toString().length())
+							+"/"+serverSocket.getLocalPort()+"\n\n");
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] SERVER IS OFFLINE\n\n");
+					clientQueue.clear();
+					subserverQueue.clear();
+					ClientsTextArea.clear();
+					SubserversTextArea.clear();
+					setUI();
+				});
+			} catch (IOException e) {
+				serverIsRunning.set(true);
+				Platform.runLater(()->{
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] Cannot close server socket!\n"
+							+"Error: "+e.toString()+"\n\n");
+					ServerLogsTextArea.appendText("["+dateFormat.format(new Date())+"] SERVER IS STILL ONLINE\n\n");	
+					setUI();
+				});
+			}
+		};
+		
+		Thread t=new Thread(r);
+		t.start();
+	}
+}

@@ -1,0 +1,62 @@
+<div class="nav">
+    <mat-sidenav-container>
+    <mat-sidenav mode="side" role="navigation" opened="true" disableClose="true">
+        <button class="btnBack" mat-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+        <ul>     
+            <li><a (click)="goToO()">O predmetu</a></li>
+            <li><a (click)="goToOb()">Obaveštenja</a></li>
+            <li><a (click)="goToP()">Predavanja</a></li>
+            <li><a (click)="goToV()">Vežbe</a></li>
+            <li><a (click)="goToL()">Laboratorija</a></li>
+            <li><a (click)="goToD()">Projekat</a></li>
+            <li><a (click)="goToI()">Ispitna pitanja</a></li>          
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-card>
+        <mat-card-title>Ažuriraj obaveštenje</mat-card-title>
+        <div class="polja-kolona">
+            <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+              <mat-label>Datum</mat-label>
+              <input matInput [matDatepicker]="picker" [max]="maxDate" [(ngModel)]="datum" [formControl]="datumControl" required>
+              <mat-error *ngIf="datumControl.invalid">{{getDatumErrorMessage()}}</mat-error>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+              <mat-label>Naslov</mat-label>
+              <input matInput [(ngModel)]='naslov' autocomplete='off' (keyup)='deleteMessage()' [formControl]="naslovControl" required>
+              <mat-error *ngIf="naslovControl.invalid">{{getNaslovErrorMessage()}}</mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" style="margin:auto; width:70%;">
+              <mat-label>Tekst</mat-label>
+              <textarea matInput [(ngModel)]='tekst' style="max-height: 100px; min-height: 50px;"autocomplete='off' (keyup)='deleteMessage()' [formControl]="tekstControl" required></textarea>
+              <mat-error *ngIf="tekstControl.invalid">{{getTekstErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <!-- <div class="fileUpload"> 
+              <input #fileInput type="file">
+              <button mat-button class ="btnUpload" (click)="addFileToList()">Dodaj</button>
+          </div> -->
+        </div>
+        <!-- <h4 *ngIf="fileNames.length">
+          Dodati fajlovi:
+        </h4>
+        <ul class="fileList">
+          <li *ngFor="let fileName of fileNames">{{nazivFajla(fileName)}}</li>
+        </ul> -->
+        <div class="dugme">
+          <button class="btnAdd" mat-button type='submit' (click)='saveChanges()'>Sačuvaj</button>
+        </div>
+        <div *ngIf="errorMsg!=''" class="poruka err">
+          {{errorMsg}}
+        </div>
+        <div *ngIf="successMsg!=''" class="poruka succ">
+          {{successMsg}}
+        </div>
+      </mat-card>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+    

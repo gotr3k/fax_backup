@@ -1,0 +1,103 @@
+<div class="telo">
+    <mat-card>
+        <mat-card-title>Plan angažovanja za {{subject.code}}</mat-card-title>
+        <div class="polja-horiz1">
+            <mat-form-field appearance="fill" style="margin-right:1%; width:34%;" *ngIf="subject.lectures>0">
+              <mat-label>Predavanja - Broj grupa</mat-label>
+              <input matInput [(ngModel)]='p' autocomplete='off' (keyup)='deleteMessage()' [formControl]="pControl" required>
+              <mat-error *ngIf="pControl.invalid">{{getPErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" *ngIf="subject.exc>0" style="margin-right:1%; width:34%;">
+              <mat-label>Vežbe - Broj grupa</mat-label>
+              <input matInput [(ngModel)]='v' autocomplete='off' (keyup)='deleteMessage()' [formControl]="vControl" required>
+              <mat-error *ngIf="vControl.invalid">{{getVErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="polja-horiz1">
+                <mat-form-field appearance="fill" style="margin-right:1%; width:34%;" *ngIf="p>0">
+                    <mat-label>P1</mat-label>
+                    <mat-select [(ngModel)]="lec[0]" name="P1" (click)="deleteMessage()">
+                        <mat-option *ngFor="let employee of employees" [value]="employee.username">
+                            {{employee.name}} {{employee.surname}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="margin-right:1%; width:34%;" *ngIf="v>0">
+                    <mat-label>V1</mat-label>
+                    <mat-select [(ngModel)]="exc[0]" name="V1" (click)="deleteMessage()">
+                        <mat-option *ngFor="let employee of employees" [value]="employee.username">
+                                {{employee.name}} {{employee.surname}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+        </div>
+
+        <div class="polja-horiz1">
+            <mat-form-field appearance="fill" style="margin-right:1%; width:34%;" *ngIf="p>1">
+                <mat-label>P2</mat-label>
+                <mat-select [(ngModel)]="lec[1]" name="P2" (click)="deleteMessage()">
+                    <mat-option *ngFor="let employee of employees" [value]="employee.username">
+                        {{employee.name}} {{employee.surname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="margin-right:1%; width:34%;" *ngIf="v>1">
+                <mat-label>V2</mat-label>
+                <mat-select [(ngModel)]="exc[1]" name="V2" (click)="deleteMessage()">
+                    <mat-option *ngFor="let employee of employees" [value]="employee.username">
+                            {{employee.name}} {{employee.surname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="polja-horiz1">
+            <mat-form-field appearance="fill" style="margin-right:1%; width:34%;" *ngIf="p>2">
+                <mat-label>P3</mat-label>
+                <mat-select [(ngModel)]="lec[2]" name="P3" (click)="deleteMessage()">
+                    <mat-option *ngFor="let employee of employees" [value]="employee.username">
+                        {{employee.name}} {{employee.surname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="margin-right:1%; width:34%;" *ngIf="v>2">
+                <mat-label>V3</mat-label>
+                <mat-select [(ngModel)]="exc[2]" name="V3" (click)="deleteMessage()">
+                    <mat-option *ngFor="let employee of employees" [value]="employee.username">
+                            {{employee.name}} {{employee.surname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="polja-horiz1">
+            <mat-form-field appearance="fill" style="margin-right:1%; width:34%;" *ngIf="p>3">
+                <mat-label>P4</mat-label>
+                <mat-select [(ngModel)]="lec[3]" name="P4">
+                    <mat-option *ngFor="let employee of employees" [value]="employee.username">
+                        {{employee.name}} {{employee.surname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="margin-right:1%; width:34%;" *ngIf="v>3">
+                <mat-label>V4</mat-label>
+                <mat-select [(ngModel)]="exc[3]" name="V4" (click)="deleteMessage()">
+                    <mat-option *ngFor="let employee of employees" [value]="employee.username">
+                            {{employee.name}} {{employee.surname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+          <div class="dugme">
+            <button class="btn-create" mat-button type='submit' (click)='create()'>Sačuvaj</button>
+          </div>
+          <div *ngIf="errorMsg!=''" class="poruka err">
+            {{errorMsg}}
+          </div>
+          <div *ngIf="successMsg!=''" class="poruka succ">
+            {{successMsg}}
+          </div>
+        </mat-card>
+</div>
